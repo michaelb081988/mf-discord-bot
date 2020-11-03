@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const squad = () => new Discord.MessageEmbed()
+const squad = new Discord.MessageEmbed()
       .setAuthor('TOTO', "https://i.imgur.com/ezC66kZ.png")
       .setColor('#AAA')
       .setTitle('First')
