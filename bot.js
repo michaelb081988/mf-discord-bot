@@ -1,11 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const squad = new Discord.MessageEmbed()
-      .setAuthor('TOTO', "https://i.imgur.com/ezC66kZ.png")
-      .setColor('#AAA')
-      .setTitle('First')
-      .setDescription('First');
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -13,7 +8,6 @@ client.on('ready', () => {
  
 client.on('message', message => {
     if (message.content === '!squad') {
-       message.channel.send(squad);
     }
 });
  
