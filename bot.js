@@ -13,7 +13,7 @@ client.on('ready', () => {
  
 client.on('message', message => {
     if (message.content === '!squad') {
-       message.channel.send(first);
+       message.channel.send(squad);
     }
 });
  
