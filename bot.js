@@ -11,14 +11,18 @@ client.on('message', message => {
     let color = 7081235; // hex: #6C0D13
     
     if (message.content === '!squad') {
+        bool found = false;
         members.forEach(function(item, index, array) {
             if(message.author === item) {
-                message.reply(" is already in the squad");
-                return;
+                found = true;
             }
         });
-        members.push(message.author);
-        message.reply(" has joined the squad list.");
+        if(found) {
+                message.reply(" is already in the squad");
+        } else {
+            members.push(message.author);
+            message.reply(" has joined the squad list.");
+        }
     }
     
     if(message.content === '!start') {
