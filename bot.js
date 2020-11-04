@@ -12,6 +12,7 @@ client.on('message', message => {
     
     if (message.content === '!squad') {
         members.push("Test");
+        message.reply(" has joined the squad list.");
     }
     
     if(message.content === '!start') {
@@ -19,11 +20,12 @@ client.on('message', message => {
         members.forEach(function(item, index, array) {
             message = message + item;
         });
-        message.channel.send(message);
+        message.reply(message);
     }
     
     if(message.content === '!clear') {
         members = [];
+        message.reply("Cleared squad list");
     }
 });
  
