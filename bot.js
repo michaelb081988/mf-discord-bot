@@ -11,21 +11,22 @@ client.on('message', message => {
     let color = 7081235; // hex: #6C0D13
     
     if (message.content === '!squad') {
-        members.push("Test");
+        members.push(message.author);
         message.reply(" has joined the squad list.");
     }
     
     if(message.content === '!start') {
         let m = "Joining members: ";
         members.forEach(function(item, index, array) {
-            m = m + item;
+            m = m + "@" + item + ", ";
         });
         message.channel.send(m);
+        members = [];
     }
     
     if(message.content === '!clear') {
         members = [];
-        message.reply("Cleared squad list");
+        message.reply(" cleared squad list");
     }
 });
  
