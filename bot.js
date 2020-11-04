@@ -20,7 +20,7 @@ client.on('message', message => {
         members.forEach(function(item, index, array) {
             m = m + item;
         });
-        message.channel.reply(m);
+        message.channel.send(m);
     }
     
     if(message.content === '!clear') {
