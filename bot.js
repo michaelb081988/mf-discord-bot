@@ -10,15 +10,18 @@ client.on('message', message => {
     let color = 7081235; // hex: #6C0D13
     
     if (message.content === '!squad') {
-        let embed = new Discord.RichEmbed({
-        title: '**Hello World**',
-        description: 'Markdown _for the win_!'
+        message.channel.send({
+        embed: {
+            color: color, // Yes, variables will work
+            title: '**Hello world!**',
+            description: 'Markdown _for the win_!',
+            author: {
+                name: message.author.tag,
+                icon_url: message.author.displayAvatarURL
+            },
+            timestamp: message.createdAt,
+        }
     });
-
-    embed.setColor(color);
-    embed.setTimestamp(message.createdAt);
-    embed.setAuthor(message.author.tag, message.author.displayAvatarURL);
-    message.channel.send(embed);
     }
 });
  
