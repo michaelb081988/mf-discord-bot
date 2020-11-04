@@ -18,7 +18,7 @@ client.on('message', message => {
         let message = "Joining members: ";
         members.forEach(function(item, index, array) {
             message = message + item;
-        }));
+        });
         message.channel.send(message);
     }
     
