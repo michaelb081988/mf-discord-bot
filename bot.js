@@ -7,6 +7,8 @@ client.on('ready', () => {
 });
  
 client.on('message', message => {
+    let color = 7081235; // hex: #6C0D13
+    
     if (message.content === '!squad') {
         let embed = new Discord.RichEmbed({
         title: '**Hello World**',
