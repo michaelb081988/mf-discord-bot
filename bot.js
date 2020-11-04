@@ -11,7 +11,7 @@ client.on('message', message => {
     let color = 7081235; // hex: #6C0D13
     
     if (message.content === '!squad') {
-        bool found = false;
+        var found = false;
         members.forEach(function(item, index, array) {
             if(message.author === item) {
                 found = true;
