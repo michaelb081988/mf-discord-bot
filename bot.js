@@ -16,11 +16,11 @@ client.on('message', message => {
     }
     
     if(message.content === '!start') {
-        let message = "Joining members: ";
+        let m = "Joining members: ";
         members.forEach(function(item, index, array) {
-            message = message + item;
+            m = m + item;
         });
-        message.reply(message);
+        message.channel.reply(m);
     }
     
     if(message.content === '!clear') {
