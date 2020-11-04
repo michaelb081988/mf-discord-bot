@@ -18,6 +18,7 @@ client.on('message', message => {
     embed.setColor(color);
     embed.setTimestamp(message.createdAt);
     embed.setAuthor(message.author.tag, message.author.displayAvatarURL);
+    message.channel.send(embed);
     }
 });
  
