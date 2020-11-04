@@ -18,7 +18,7 @@ client.on('message', message => {
     if(message.content === '!start') {
         let m = "Joining members: ";
         members.forEach(function(item, index, array) {
-            m = m + "@" + item + ", ";
+            m = m + item + ", ";
         });
         message.channel.send(m);
         members = [];
