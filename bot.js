@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 process.env.TZ = 'Australia/Perth'
 
+let messaged = false;
+
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -18,7 +20,15 @@ client.on('message', message => {
 function doStuff() {
     let date = new Date();
     if(date.getHours() === 11) {
-        client.channels.get('773111106931523624').send('everyone COLO TIME!!!');
+        if(date.getMinutes() == 10) {
+            if(!messaged) {
+                client.channels.get('773111106931523624').send('@everyone COLO TIME!!!');
+                messaged = true;
+            }
+        }
+        if(date.getMinutes() == 11) {
+            messaged = false
+        }
     }
 }
 let myTimer = setInterval(doStuff, 1000); //time is in ms
