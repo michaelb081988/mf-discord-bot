@@ -17,7 +17,7 @@ let myTimer = setInterval(doStuff, 1000); //time is in ms
 
 function doStuff() {
     let date = new Date();
-    if(date.getHours()) == "10") {
+    if(date.getHours() === "10") {
         client.channels.get('773111106931523624').send('everyone COLO TIME!!!');
     }
 }
