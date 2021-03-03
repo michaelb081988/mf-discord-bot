@@ -21,7 +21,7 @@ client.on('ready', () => {
 client.on('message', message => {
     if(!message.content.startsWith(process.env.Prefix) || message.author.bot) return;
     
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const args = message.content.slice(process.env.Prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
     
     let date = new Date();
