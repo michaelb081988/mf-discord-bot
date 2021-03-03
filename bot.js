@@ -56,7 +56,7 @@ function doStuff() {
     if(messaged) {
         if(CheckTime(lastHours, lastMinutes +1)) {
            messaged = false;
-           lastHours = hours-1;
+           lastHours = lastHours-1;
         }
     }
 }
