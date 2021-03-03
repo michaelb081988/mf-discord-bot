@@ -5,7 +5,7 @@ process.env.TZ = 'Australia/Perth'
 
 let messaged = false;
 
-//Event Timers
+//Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = true; // Guild Box O' Grimoire // AKA Trash Event
 
 client.on('ready', () => {
