@@ -8,8 +8,9 @@ client.on('ready', () => {
 });
  
 client.on('message', message => {
+    let date = new Date();
     if (message.content === '!hello') {
-        message.reply(" I am still alive!");
+        message.reply(" I am still alive! " + date.getHours());
     }
 });
 
