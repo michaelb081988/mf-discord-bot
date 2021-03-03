@@ -34,7 +34,7 @@ client.on('message', message => {
 
 function doStuff() {
     // Mani test event to the spammy level chat
-        if(CheckTime(13, 30)) {
+        if(CheckTime(13, 33)) {
             if(!messaged) {
                 client.channels.get('763085331565117482').send('New time test with a bunch of other stuff... https://i.imgur.com/DehsKa7.jpg');
                 messaged = true;
