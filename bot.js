@@ -47,7 +47,7 @@ function BloodEvent() {
             message.reply(" Blood event is disabled!");
         } else {
             bloodEvent = true;
-            message.reply(" Blood event enabled! Have fun!", { file:https://i.imgur.com/HKw7PQj.jpg });
+            message.reply(" Blood event enabled! Have fun!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
         }
 }
 
