@@ -62,7 +62,7 @@ function doStuff() {
     
     //Reset sent message one minute later to stop spam because i am lazy to do this properly
     if(messaged) {
-        if(CheckTime(hours, minutes +1)) {
+        if(CheckTime(lastHours, lastMinutes +1)) {
            messaged = false;
            lastHours = hours-1;
         }
