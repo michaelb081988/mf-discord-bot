@@ -30,18 +30,15 @@ client.on('message', message => {
     }
     
     if (command === 'event') {
-		if(args.length === '0') {
-			message.reply(" Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
-		}
 		if(args[0] === 'blood') {
-			BloodEvent();
+			BloodEvent(message);
 			return;
 		}
-		message.reply(" Sorry but that event is not in my list...");
+		message.reply(" Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
     }
 });
 
-function BloodEvent() {
+function BloodEvent(message) {
         if(bloodEvent) {
             bloodEvent = false;
             message.reply(" Blood event is disabled!");
