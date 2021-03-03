@@ -33,14 +33,6 @@ client.on('message', message => {
 });
 
 function doStuff() {
-    // Mani test event to the spammy level chat
-        if(CheckTime(13, 33)) {
-            if(!messaged) {
-                client.channels.get('763085331565117482').send('New time test with a bunch of other stuff... https://i.imgur.com/DehsKa7.jpg');
-                messaged = true;
-            }
-    }
-    
     // Colo alert timer
     if(CheckTime(9, 57)) {
             if(!messaged) {
