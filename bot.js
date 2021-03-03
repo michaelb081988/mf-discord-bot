@@ -16,7 +16,7 @@ client.on('message', message => {
 });
 
 function doStuff() {
-    client.channels.get('773111106931523624').send('Hello here!');
+    //client.channels.get('773111106931523624').send('Hello here!');
 }
 setInterval(doStuff, 1000); //time is in ms
  
