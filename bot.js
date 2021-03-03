@@ -9,6 +9,7 @@ let lastMinutes = 0;
 
 //List of channels
 let coloChannel = 762832294259195946;
+let spamChannel = 0;
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
@@ -24,20 +25,30 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     
     let date = new Date();
-    if (message.content === '!hello') {
+    if (command === 'hello') {
         message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
     
-    if (message.content === '!blood') {
+    if (command === 'event') {
+		if(args.length === '0') {
+			message.reply(" Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
+		if(args[0] === 'blood') {
+			BloodEvent();
+			return;
+		}
+		message.reply(" Sorry but that event is not in my list...");
+    }
+});
+
+function BloodEvent() {
         if(bloodEvent) {
             bloodEvent = false;
             message.reply(" Blood event is disabled!");
         } else {
             bloodEvent = true;
-            message.reply(" Blood event enabled! Have fun! https://i.imgur.com/HKw7PQj.jpg");
+            message.reply(" Blood event enabled! Have fun!", { file:https://i.imgur.com/HKw7PQj.jpg });
         }
-    }
-});
+}
 
 function doStuff() {
     // Colo alert timer
