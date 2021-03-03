@@ -14,14 +14,14 @@ client.on('message', message => {
     }
 });
 
-let myTimer = setInterval(doStuff, 1000); //time is in ms
 
 function doStuff() {
     let date = new Date();
-    if(date.getHours() === "10") {
+    if(date.getHours() === 11) {
         client.channels.get('773111106931523624').send('everyone COLO TIME!!!');
     }
 }
+let myTimer = setInterval(doStuff, 1000); //time is in ms
 
  
 // THIS  MUST  BE  THIS  WAY
