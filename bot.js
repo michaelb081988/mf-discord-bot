@@ -9,10 +9,12 @@ let lastMinutes = 0;
 
 //List of channels
 let coloChannel = 762832294259195946;
-let spamChannel = 0;
+let eventChannel = 762830413830946816;
+let spamChannel = 763085331565117482;
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
+let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -34,7 +36,11 @@ client.on('message', message => {
 			BloodEvent(message);
 			return;
 		}
-		message.channel.send("Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
+		if(args[0] === 'guerrilla') {
+			GuerrillaEvent(message);
+			return;
+		}
+		message.channel.send("Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\nGuerrilla Event (guerrilla): " + guerrillaEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
     }
 });
 
@@ -45,6 +51,16 @@ function BloodEvent(message) {
         } else {
             bloodEvent = true;
             message.channel.send("Blood event enabled! Have fun!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+        }
+}
+
+function GuerrillaEvent(message) {
+        if(guerrillaEvent) {
+            guerrillaEvent = false;
+            message.channel.send("Guerrilla event is disabled!");
+        } else {
+            guerrillaEvent = true;
+            message.channel.send("Guerrilla event enabled! Have fun!", { file:"https://i.imgur.com/issykko.png" });
         }
 }
 
@@ -63,6 +79,17 @@ function doStuff() {
         if(CheckTime(10, 22)) {
                 if(!messaged) {
                     client.channels.get(coloChannel).send("Please don\'t forget to spend your Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+                    messaged = true;
+                }
+        }
+    }
+	// Guerrilla Event
+    if(guerrillaEvent) {
+        //Right after our colo ends + a minute or 2
+        if(CheckTime(8, 30) || CheckTime(10, 30) || CheckTime(19, 30) || CheckTime(2, 30) || CheckTime(4, 30) || CheckTime(6, 30)) {
+                if(!messaged) {
+                    //client.channels.get(eventChannel).send("Guerrilla Event is active right now! Get in on it for the next 30 minutes.", { file:"https://i.imgur.com/issykko.png" });
+					console.log("Guerrilla Event triggered...");
                     messaged = true;
                 }
         }
