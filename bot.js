@@ -14,6 +14,9 @@ client.on('message', message => {
     if (message.content === '!hello') {
         message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
+    if (message.content === '!colo') {
+        client.channels.get('762832294259195946').send('Colo time test to make sure it goes to the right channel, but only Mani can send this message so don\'t even try.<:emoji_1:790804706175746068>');
+    }
 });
 
 
