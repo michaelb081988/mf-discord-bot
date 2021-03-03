@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-let members = [];
+process.env.TZ = 'Australia/Perth'
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -10,35 +10,15 @@ client.on('ready', () => {
 client.on('message', message => {
     let color = 7081235; // hex: #6C0D13
     
-    if (message.content === '!squad') {
-        var found = false;
-        members.forEach(function(item, index, array) {
-            if(message.author === item) {
-                found = true;
-            }
-        });
-        if(found) {
-                message.reply(" is already in the squad");
-        } else {
-            members.push(message.author);
-            message.reply(" has joined the squad list.");
-        }
-    }
-    
-    if(message.content === '!start') {
-        let m = "Joining members: ";
-        members.forEach(function(item, index, array) {
-            m = m + item + ", ";
-        });
-        message.channel.send(m);
-        members = [];
-    }
-    
-    if(message.content === '!clear') {
-        members = [];
-        message.reply(" cleared squad list");
+    if (message.content === '!hello') {
+        message.reply(" I am still alive!");
     }
 });
+
+function doStuff() {
+    client.channels.get('773111106931523624').send('Hello here!');
+}
+setInterval(doStuff, 1000); //time is in ms
  
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
