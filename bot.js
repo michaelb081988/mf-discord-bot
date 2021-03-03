@@ -12,21 +12,21 @@ client.on('ready', () => {
 client.on('message', message => {
     let date = new Date();
     if (message.content === '!hello') {
-        message.reply(" I am still alive! " + date.getHours());
+        message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
 });
 
 
 function doStuff() {
     let date = new Date();
-    if(date.getHours() === 11) {
-        if(date.getMinutes() == 10) {
+    if(date.getHours() === 9) {
+        if(date.getMinutes() == 57) {
             if(!messaged) {
-                client.channels.get('773111106931523624').send('@everyone COLO TIME!!!');
+                client.channels.get('762832294259195946').send('@everyone COLO TIME!!!');
                 messaged = true;
             }
         }
-        if(date.getMinutes() == 11) {
+        if(date.getMinutes() == 58) {
             messaged = false
         }
     }
