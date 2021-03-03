@@ -7,15 +7,22 @@ let messaged = false;
 let lastHours = 0;
 let lastMinutes = 0;
 
+//List of channels
+let coloChannel = 762832294259195946;
+
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
-
 
 client.on('ready', () => {
     console.log('I am ready!');
 });
  
 client.on('message', message => {
+    if(!message.content.StartsWith(process.env.Prefix) || message.author.bot) return;
+    
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+    
     let date = new Date();
     if (message.content === '!hello') {
         message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
@@ -36,7 +43,7 @@ function doStuff() {
     // Colo alert timer
     if(CheckTime(9, 57)) {
             if(!messaged) {
-                client.channels.get('762832294259195946').send('@everyone Time for Colo! https://i.imgur.com/DehsKa7.jpg');
+                client.channels.get(coloChannel).send('@everyone Time for Colo! https://i.imgur.com/DehsKa7.jpg');
                 messaged = true;
             }
     }
@@ -46,7 +53,7 @@ function doStuff() {
         //Right after our colo ends + a minute or 2
         if(CheckTime(10, 22)) {
                 if(!messaged) {
-                    client.channels.get('762832294259195946').send('Please don\'t forget to spend your Blood! https://i.imgur.com/HKw7PQj.jpg');
+                    client.channels.get(coloChannel).send('Please don\'t forget to spend your Blood! https://i.imgur.com/HKw7PQj.jpg');
                     messaged = true;
                 }
         }
