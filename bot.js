@@ -17,6 +17,10 @@ client.on('message', message => {
     if (message.content === '!hello') {
         message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
+    
+    if (message.content === '!blood') {
+        client.channels.get('762832294259195946').send('Please don\'t forget to spend your Blood! https://i.imgur.com/HKw7PQj.jpg');
+    }
 });
 
 
