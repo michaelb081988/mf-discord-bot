@@ -34,17 +34,17 @@ client.on('message', message => {
 			BloodEvent(message);
 			return;
 		}
-		message.reply(" Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
+		message.channel.send("Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
     }
 });
 
 function BloodEvent(message) {
         if(bloodEvent) {
             bloodEvent = false;
-            message.reply(" Blood event is disabled!");
+            message.channel.send("Blood event is disabled!");
         } else {
             bloodEvent = true;
-            message.reply(" Blood event enabled! Have fun!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+            message.channel.send("Blood event enabled! Have fun!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
         }
 }
 
@@ -52,7 +52,7 @@ function doStuff() {
     // Colo alert timer
     if(CheckTime(9, 57)) {
             if(!messaged) {
-                client.channels.get(coloChannel).send('@everyone Time for Colo! https://i.imgur.com/DehsKa7.jpg');
+                client.channels.get(coloChannel).send("@everyone Time for Colo!", { file:"https://i.imgur.com/DehsKa7.jpg" });
                 messaged = true;
             }
     }
@@ -62,7 +62,7 @@ function doStuff() {
         //Right after our colo ends + a minute or 2
         if(CheckTime(10, 22)) {
                 if(!messaged) {
-                    client.channels.get(coloChannel).send('Please don\'t forget to spend your Blood! https://i.imgur.com/HKw7PQj.jpg');
+                    client.channels.get(coloChannel).send("Please don\'t forget to spend your Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
                     messaged = true;
                 }
         }
