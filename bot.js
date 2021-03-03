@@ -33,8 +33,6 @@ client.on('message', message => {
 });
 
 function doStuff() {
-    let date = new Date();
-    
     // Mani test event to the spammy level chat
         if(CheckTime(13, 30)) {
             if(!messaged) {
@@ -73,6 +71,7 @@ function doStuff() {
 let myTimer = setInterval(doStuff, 1000); //time is in ms
 
 function CheckTime(hours, minutes) {
+    let date = new Date();
     if(date.getHours() === hours) {
         if(date.getMinutes() === minutes) {
             lastHours = hours;
