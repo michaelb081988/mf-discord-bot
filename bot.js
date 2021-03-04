@@ -43,7 +43,7 @@ cron.schedule('0 57 9 * * *', () => {
 });
 
 // Blood event, has to be a cron but then check if active during // 10:20
-cron.schedule('0 20 10 * * *', () => {
+cron.schedule('0 27 10 * * *', () => {
     if(bloodEvent) {
 	    client.channels.get('762832294259195946').send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
 	}
