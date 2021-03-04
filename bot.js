@@ -30,40 +30,7 @@ client.on('message', message => {
     if (command === 'hello') {
         message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
-    
-    if (command === 'event') {
-		if(message.channel
-		if(args[0] === 'blood') {
-			BloodEvent(message);
-			return;
-		}
-		if(args[0] === 'guerrilla') {
-			GuerrillaEvent(message);
-			return;
-		}
-		message.channel.send("Here are the current events:\nGuild Box O\' Grimoire (blood): " + bloodEvent + "\nGuerrilla Event (guerrilla): " + guerrillaEvent + "\n\nTo turn on/off the events do !event name (the brackets value).");
-    }
 });
-
-function BloodEvent(message) {
-        if(bloodEvent) {
-            bloodEvent = false;
-            message.channel.send("Blood event is disabled!");
-        } else {
-            bloodEvent = true;
-            message.channel.send("Blood event enabled! Have fun!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
-        }
-}
-
-function GuerrillaEvent(message) {
-        if(guerrillaEvent) {
-            guerrillaEvent = false;
-            message.channel.send("Guerrilla event is disabled!");
-        } else {
-            guerrillaEvent = true;
-            message.channel.send("Guerrilla event enabled! Have fun!", { file:"https://i.imgur.com/issykko.png" });
-        }
-}
 
 // 30 minute colo warning // 9:30
 cron.schedule('0 30 9 * * *', () => {
