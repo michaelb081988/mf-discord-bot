@@ -1,25 +1,25 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const Discord = require('discord.js'); //DiscordJS base
+const client = new Discord.Client(); //Client connector
+const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X time
 
+//Set time zone to me so i can know when things are supposed to be done
 process.env.TZ = 'Australia/Perth'
 
-let messaged = false;
-let lastHours = 0;
-let lastMinutes = 0;
-
 //List of channels
-let coloChannel = 762832294259195946;
-let eventChannel = 762830413830946816;
-let spamChannel = 763085331565117482;
+let coloChannel = 762832294259195946; // #colosseum
+let eventChannel = 762830413830946816; // #events
+let spamChannel = 816677982562811944; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 
+//Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
 });
  
+// Waiting for messages
 client.on('message', message => {
     if(!message.content.startsWith(process.env.Prefix) || message.author.bot) return;
     
@@ -32,6 +32,7 @@ client.on('message', message => {
     }
     
     if (command === 'event') {
+		if(message.channel
 		if(args[0] === 'blood') {
 			BloodEvent(message);
 			return;
@@ -64,58 +65,22 @@ function GuerrillaEvent(message) {
         }
 }
 
-function doStuff() {
-    // Colo alert timer
-    if(CheckTime(9, 57)) {
-            if(!messaged) {
-                client.channels.get(coloChannel).send("@everyone Time for Colo!", { file:"https://i.imgur.com/DehsKa7.jpg" });
-                messaged = true;
-            }
-    }
-    
-    // Blood Event
+// 30 minute colo warning // 9:30
+cron.schedule('0 30 9 * * *', () => {
+	client.channels.get(coloChannel).send("Colo starts in 30 minutes!!", { file:"https://i.imgur.com/DehsKa7.jpg" });
+});
+
+// Colo starting in 3 minutes! // 9:57
+cron.schedule('0 57 9 * * *', () => {
+    client.channels.get(coloChannel).send("@everyone Colo starting now!", { file:"https://i.imgur.com/DehsKa7.jpg" });
+});
+
+// Blood event, has to be a cron but then check if active during // 10:20
+cron.schedule('0 20 10 * * *', () => {
     if(bloodEvent) {
-        //Right after our colo ends + a minute or 2
-        if(CheckTime(10, 22)) {
-                if(!messaged) {
-                    client.channels.get(coloChannel).send("Please don\'t forget to spend your Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
-                    messaged = true;
-                }
-        }
-    }
-	// Guerrilla Event
-    if(guerrillaEvent) {
-        //Right after our colo ends + a minute or 2
-        if(CheckTime(8, 30) || CheckTime(10, 30) || CheckTime(19, 30) || CheckTime(2, 30) || CheckTime(4, 30) || CheckTime(6, 30)) {
-                if(!messaged) {
-                    //client.channels.get(eventChannel).send("Guerrilla Event is active right now! Get in on it for the next 30 minutes.", { file:"https://i.imgur.com/issykko.png" });
-					console.log("Guerrilla Event triggered...");
-                    messaged = true;
-                }
-        }
-    }
-    
-    //Reset sent message one minute later to stop spam because i am lazy to do this properly
-    if(messaged) {
-        if(CheckTime(lastHours, lastMinutes +1)) {
-           messaged = false;
-           lastHours = lastHours-1;
-        }
-    }
-}
-let myTimer = setInterval(doStuff, 1000); //time is in ms
+	    client.channels.get('762832294259195946').send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+	}
+});
 
-function CheckTime(hours, minutes) {
-    let date = new Date();
-    if(date.getHours() === hours) {
-        if(date.getMinutes() === minutes) {
-            lastHours = hours;
-            lastMinutes = minutes;
-            return true;
-        }
-    }
-    return false;
-}
-
-// THIS  MUST  BE  THIS  WAY
+// This connects the bot to the Discord servers, without this nothing starts
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
