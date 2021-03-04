@@ -6,9 +6,9 @@ const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X tim
 process.env.TZ = 'Australia/Perth'
 
 //List of channels
-let coloChannel = 762832294259195946; // #colosseum
-let eventChannel = 762830413830946816; // #events
-let spamChannel = 816677982562811944; // #mani's-bot-testing
+let coloChannel = '762832294259195946'; // #colosseum
+let eventChannel = '762830413830946816'; // #events
+let spamChannel = '816677982562811944'; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = true; // Guild Box O' Grimoire // AKA Trash Event
@@ -28,7 +28,7 @@ client.on('message', message => {
     
     let date = new Date();
     if (command === 'hello') {
-        message.reply(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
+        client.channels.get(spamChannel).send(" I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
 });
 
