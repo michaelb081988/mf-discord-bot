@@ -15,8 +15,8 @@ let bloodEvent = true; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 
 //Keep a list of AFK/Late players to show during colo live message!
-var latePlayers = [];
-var afkPlayers = [];
+var latePlayers = [""];
+var afkPlayers = [""];
 
 //Startup so we know it is running and connected
 client.on('ready', () => {
@@ -55,7 +55,7 @@ client.on('message', message => {
     }
 
     if(command === 'colotest') {
-        const embed = {
+        var embed = {
             "title": "Colo Starting!",
             "color": 2713012,
             "timestamp": "2021-03-05T07:02:05.369Z",
@@ -88,8 +88,8 @@ client.on('message', message => {
             ]
           };
         client.channels.get(spamChannel).send("@ManifestFailure Colo starting now! BUT IT'S FAKE DO NOT TRUST IT THIS IS A TEST OMG", { embed });
-        afkPlayers = [];
-        latePlayers = [];
+        afkPlayers = [""];
+        latePlayers = [""];
     }
 });
 
