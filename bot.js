@@ -17,6 +17,7 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 //Keep a list of AFK/Late players to show during colo live message!
 var latePlayers = ["~~      ~~"];
 var afkPlayers = ["~~      ~~"];
+var embed = {};
 
 //A list of random images to use for colo announcements
 var coloLogo = [
@@ -68,7 +69,8 @@ client.on('message', message => {
     }
 
     if(command === 'list' || command === 'lists') {
-        message.channel.send("Here is the current list for tonights colo!", { announceColo() });
+        announceColo()
+        message.channel.send("Here is the current list for tonights colo!", { embed });
     }
 });
 
@@ -79,7 +81,8 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    client.channels.get(spamChannel).send("@everyone Colo starting now!", { announceColo() });
+    announceColo()
+    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
@@ -124,7 +127,6 @@ function announceColo() {
       };
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
-    return embed;
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
