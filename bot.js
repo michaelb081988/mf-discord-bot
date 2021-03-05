@@ -18,6 +18,10 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 var latePlayers = ["~~      ~~"];
 var afkPlayers = ["~~      ~~"];
 
+//A list of random images to use for colo announcements
+var coloLogo = ["https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"];
+var coloImage = ["https://i.imgur.com/DehsKa7.jpg"];
+
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
@@ -55,12 +59,6 @@ client.on('message', message => {
     }
 
     if(command === 'colotest') {
-        if(afkPlayers.length === '0') {
-            afkPlayers.push("Nobody!");
-        }
-        if(latePlayers.length === '0') {
-            latePlayers.push("Nobody!");
-        }
         var embed = {
             "title": "Colo Starting!",
             "color": 2713012,
@@ -70,10 +68,10 @@ client.on('message', message => {
               "text": "ManifestFailure"
             },
             "thumbnail": {
-              "url": "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"
+              "url": coloLogo[Math.floor(Math.random() * items.length)]
             },
             "image": {
-              "url": "https://i.imgur.com/DehsKa7.jpg"
+              "url": coloImage[Math.floor(Math.random() * items.length)]
             },
             "author": {
               "name": "Colo Announcer",
