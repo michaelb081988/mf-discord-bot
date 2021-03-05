@@ -60,44 +60,6 @@ client.on('message', message => {
         client.channels.get(spamChannel).send(message.author.username + " is going to be a little late today. Please forgive them!");
         latePlayers.push(message.author.username);
     }
-
-    if(command === 'colotest') {
-        var embed = {
-            "title": "Colo Starting!",
-            "color": 2713012,
-            "timestamp": "2021-03-05T07:02:05.369Z",
-            "footer": {
-              "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-              "text": "ManifestFailure"
-            },
-            "thumbnail": {
-              "url": coloLogo[Math.floor(Math.random() * coloLogo.length)]
-            },
-            "image": {
-              "url": coloImage[Math.floor(Math.random() * coloImage.length)]
-            },
-            "author": {
-              "name": "Colo Announcer",
-              "url": "https://manifestfailure.com",
-              "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
-            },
-            "fields": [
-              {
-                "name": "AFK",
-                "value": afkPlayers.join("\n"),
-                "inline": true
-              },
-              {
-                "name": "Late",
-                "value": latePlayers.join("\n"),
-                "inline": true
-              }
-            ]
-          };
-        client.channels.get(spamChannel).send("everyone Colo starting now! BUT IT'S FAKE DO NOT TRUST IT THIS IS A TEST OMG", { embed });
-        afkPlayers = ["~~      ~~"];
-        latePlayers = ["~~      ~~"];
-    }
 });
 
 // 30 minute colo warning // 9:30
@@ -107,7 +69,41 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    client.channels.get(coloChannel).send("@everyone Colo starting now!", { file:"https://i.imgur.com/DehsKa7.jpg" });
+    var embed = {
+        "title": "Colo Starting!",
+        "color": 2713012,
+        "timestamp": "2021-03-05T07:02:05.369Z",
+        "footer": {
+          "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg",
+          "text": "ManifestFailure"
+        },
+        "thumbnail": {
+          "url": coloLogo[Math.floor(Math.random() * coloLogo.length)]
+        },
+        "image": {
+          "url": coloImage[Math.floor(Math.random() * coloImage.length)]
+        },
+        "author": {
+          "name": "Colo Announcer",
+          "url": "https://manifestfailure.com",
+          "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
+        },
+        "fields": [
+          {
+            "name": "AFK",
+            "value": afkPlayers.join("\n"),
+            "inline": true
+          },
+          {
+            "name": "Late",
+            "value": latePlayers.join("\n"),
+            "inline": true
+          }
+        ]
+      };
+    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
+    afkPlayers = ["~~      ~~"];
+    latePlayers = ["~~      ~~"];
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
