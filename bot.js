@@ -39,6 +39,14 @@ client.on('message', message => {
     if(command === 'name') {
         client.channels.get(spamChannel).send("Your name shows as " + message.author.username);
     }
+
+    if(command === 'afk') {
+        client.channels.get(spamChannel).send(message.author.username + " is going to be afk for this colo. Added to the list!");
+    }
+
+    if(command === 'late') {
+        client.channels.get(spamChannel).send(message.author.username + " is going to be a little late today. Please forgive them!");
+    }
 });
 
 // 30 minute colo warning // 9:30
