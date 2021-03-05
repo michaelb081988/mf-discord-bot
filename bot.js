@@ -19,8 +19,15 @@ var latePlayers = ["~~      ~~"];
 var afkPlayers = ["~~      ~~"];
 
 //A list of random images to use for colo announcements
-var coloLogo = ["https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"];
-var coloImage = ["https://i.imgur.com/DehsKa7.jpg"];
+var coloLogo = [
+    "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg",
+    "https://i.pinimg.com/originals/c9/03/d5/c903d5c29570b91c6b20284a64ba7874.png",
+    "https://i.pinimg.com/originals/fc/ee/37/fcee373c2eb654238ba23ea082144e93.png"
+];
+var coloImage = [
+    "https://i.imgur.com/DehsKa7.jpg",
+    "https://www.siliconera.com/wp-content/uploads/2020/08/Princess-Kaguya-Breaker-SINoALICE.jpg"
+];
 
 //Startup so we know it is running and connected
 client.on('ready', () => {
