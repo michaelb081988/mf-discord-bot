@@ -68,10 +68,10 @@ client.on('message', message => {
               "text": "ManifestFailure"
             },
             "thumbnail": {
-              "url": coloLogo[Math.floor(Math.random() * items.length)]
+              "url": coloLogo[Math.floor(Math.random() * coloLogo.length)]
             },
             "image": {
-              "url": coloImage[Math.floor(Math.random() * items.length)]
+              "url": coloImage[Math.floor(Math.random() * coloImage.length)]
             },
             "author": {
               "name": "Colo Announcer",
