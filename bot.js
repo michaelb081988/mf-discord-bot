@@ -14,6 +14,10 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 let bloodEvent = true; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 
+//Keep a list of AFK/Late players to show during colo live message!
+var latePlayers = [];
+var afkPlayers = [];
+
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
@@ -42,10 +46,16 @@ client.on('message', message => {
 
     if(command === 'afk') {
         client.channels.get(spamChannel).send(message.author.username + " is going to be afk for this colo. Added to the list!");
+        afkPlayers.push(message.author.username);
     }
 
     if(command === 'late') {
         client.channels.get(spamChannel).send(message.author.username + " is going to be a little late today. Please forgive them!");
+        latePlayers.push(message.author.username);
+    }
+
+    if(command === 'colotest') {
+        client.channels.get(spamChannel).send("Colo starts in 30 minutes!!", { file:"https://i.imgur.com/DehsKa7.jpg" });
     }
 });
 
