@@ -26,7 +26,7 @@ var coloLogo = [
 ];
 var coloImage = [
     "https://i.imgur.com/DehsKa7.jpg",
-    "https://www.siliconera.com/wp-content/uploads/2020/08/Princess-Kaguya-Breaker-SINoALICE.jpg"
+    "https://i.imgur.com/evYE00g.png"
 ];
 
 //Startup so we know it is running and connected
@@ -50,10 +50,6 @@ client.on('message', message => {
 	if(command === 'sorry') {
 		client.channels.get(coloChannel).send("I'm sorry I missed calling out colo. I will do it tomorrow I promise", { file: "https://i.ytimg.com/vi/9XfkZlcG8KU/maxresdefault.jpg" });
 	}
-
-    if(command === 'name') {
-        client.channels.get(spamChannel).send("Your name shows as " + message.author.username);
-    }
 
     if(command === 'afk') {
         client.channels.get(spamChannel).send(message.author.username + " is going to be afk for this colo. Added to the list!");
