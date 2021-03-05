@@ -18,6 +18,39 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 var latePlayers = [];
 var afkPlayers = [];
 
+const embed = {
+    "title": "Colo Starting!",
+    "color": 2713012,
+    "timestamp": "2021-03-05T07:02:05.369Z",
+    "footer": {
+      "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "text": "SinoAlice Logo"
+    },
+    "thumbnail": {
+      "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+    },
+    "image": {
+      "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+    },
+    "author": {
+      "name": "Colo Announcer",
+      "url": "https://discordapp.com",
+      "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png"
+    },
+    "fields": [
+      {
+        "name": "AFK",
+        "value": "ManifestFailure\nAgretgundam\nNever Bubbly",
+        "inline": true
+      },
+      {
+        "name": "Late",
+        "value": "Never Myst\nRaine maybe\nAlso Ivo",
+        "inline": true
+      }
+    ]
+  };
+
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
@@ -55,7 +88,7 @@ client.on('message', message => {
     }
 
     if(command === 'colotest') {
-        client.channels.get(spamChannel).send("Colo starts in 30 minutes!!", { file:"https://i.imgur.com/DehsKa7.jpg" });
+        client.channels.get(spamChannel).send(embed);
     }
 });
 
