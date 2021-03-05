@@ -34,6 +34,10 @@ client.on('message', message => {
 	if(command === 'sorry') {
 		client.channels.get(coloChannel).send("I'm sorry I missed calling out colo. I will do it tomorrow I promise", { file: "https://i.ytimg.com/vi/9XfkZlcG8KU/maxresdefault.jpg" });
 	}
+
+    if(command === 'name') {
+        client.channels.get(spamChannel).send("Your name shows as " + client.channels.author);
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -46,8 +50,8 @@ cron.schedule('0 57 9 * * *', () => {
     client.channels.get(coloChannel).send("@everyone Colo starting now!", { file:"https://i.imgur.com/DehsKa7.jpg" });
 });
 
-// Blood event, has to be a cron but then check if active during // 10:20
-cron.schedule('0 20 10 * * *', () => {
+// Blood event, has to be a cron but then check if active during // 10:21
+cron.schedule('0 21 10 * * *', () => {
     if(bloodEvent) {
 	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
 	}
