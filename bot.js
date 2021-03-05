@@ -75,6 +75,17 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
+    announceColo();
+});
+
+// Blood event, has to be a cron but then check if active during // 10:21
+cron.schedule('0 21 10 * * *', () => {
+    if(bloodEvent) {
+	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+	}
+});
+
+function announceColo() {
     var embed = {
         "title": "Colo Starting!",
         "color": 2713012,
@@ -110,14 +121,7 @@ cron.schedule('0 57 9 * * *', () => {
     client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
-});
-
-// Blood event, has to be a cron but then check if active during // 10:21
-cron.schedule('0 21 10 * * *', () => {
-    if(bloodEvent) {
-	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
-	}
-});
+}
 
 // This connects the bot to the Discord servers, without this nothing starts
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
