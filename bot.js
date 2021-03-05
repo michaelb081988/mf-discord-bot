@@ -59,12 +59,16 @@ client.on('message', message => {
     }
 
     if(command === 'late') {
-        message.reply(" is going to be a little late today. Please forgive them!");
+        message.reply(" is going to be a little late tonight. Please forgive them!");
         latePlayers.push(message.author.username);
     }
 
     if(command === 'colo') {
         message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement! Once you are on the list however you cannot be removed, so let the officers know!");
+    }
+
+    if(command === 'list' || command === 'lists') {
+        message.channel.send("Here is the current list for tonights colo!", { announceColo() });
     }
 });
 
@@ -75,7 +79,7 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    announceColo();
+    client.channels.get(spamChannel).send("@everyone Colo starting now!", { announceColo() });
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
@@ -118,9 +122,9 @@ function announceColo() {
           }
         ]
       };
-    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
+    return embed;
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
