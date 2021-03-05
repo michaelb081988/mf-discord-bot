@@ -17,7 +17,6 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 //Keep a list of AFK/Late players to show during colo live message!
 var latePlayers = ["~~      ~~"];
 var afkPlayers = ["~~      ~~"];
-var embed = {};
 
 //A list of random images to use for colo announcements
 var coloLogo = [
@@ -69,7 +68,38 @@ client.on('message', message => {
     }
 
     if(command === 'list' || command === 'lists') {
-        announceColo()
+        var embed = {
+            "title": "Colo Starting!",
+            "color": 2713012,
+            "timestamp": "2021-03-05T07:02:05.369Z",
+            "footer": {
+                "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg",
+                "text": "ManifestFailure"
+            },
+            "thumbnail": {
+                "url": coloLogo[Math.floor(Math.random() * coloLogo.length)]
+            },
+            "image": {
+                "url": coloImage[Math.floor(Math.random() * coloImage.length)]
+            },
+            "author": {
+                "name": "Colo Announcer",
+                "url": "https://manifestfailure.com",
+                "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
+            },
+            "fields": [
+                {
+                "name": "AFK",
+                "value": afkPlayers.join("\n"),
+                "inline": true
+                },
+                {
+                "name": "Late",
+                "value": latePlayers.join("\n"),
+                "inline": true
+                }
+            ]
+        };
         message.channel.send("Here is the current list for tonights colo!", { embed });
     }
 });
@@ -81,18 +111,6 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    announceColo()
-    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
-});
-
-// Blood event, has to be a cron but then check if active during // 10:21
-cron.schedule('0 21 10 * * *', () => {
-    if(bloodEvent) {
-	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
-	}
-});
-
-function announceColo() {
     var embed = {
         "title": "Colo Starting!",
         "color": 2713012,
@@ -127,7 +145,15 @@ function announceColo() {
       };
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
-}
+    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
+});
+
+// Blood event, has to be a cron but then check if active during // 10:21
+cron.schedule('0 21 10 * * *', () => {
+    if(bloodEvent) {
+	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+	}
+});
 
 // This connects the bot to the Discord servers, without this nothing starts
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
