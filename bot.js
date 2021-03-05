@@ -24,18 +24,18 @@ const embed = {
     "timestamp": "2021-03-05T07:02:05.369Z",
     "footer": {
       "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-      "text": "SinoAlice Logo"
+      "text": "ManifestFailure"
     },
     "thumbnail": {
-      "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+      "url": "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"
     },
     "image": {
-      "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+      "url": "https://i.imgur.com/DehsKa7.jpg"
     },
     "author": {
       "name": "Colo Announcer",
-      "url": "https://discordapp.com",
-      "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png"
+      "url": "https://manifestfailure.com",
+      "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
     },
     "fields": [
       {
