@@ -18,39 +18,6 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 var latePlayers = [];
 var afkPlayers = [];
 
-const embed = {
-    "title": "Colo Starting!",
-    "color": 2713012,
-    "timestamp": "2021-03-05T07:02:05.369Z",
-    "footer": {
-      "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-      "text": "ManifestFailure"
-    },
-    "thumbnail": {
-      "url": "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"
-    },
-    "image": {
-      "url": "https://i.imgur.com/DehsKa7.jpg"
-    },
-    "author": {
-      "name": "Colo Announcer",
-      "url": "https://manifestfailure.com",
-      "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
-    },
-    "fields": [
-      {
-        "name": "AFK",
-        "value": "ManifestFailure\nAgretgundam\nNever Bubbly",
-        "inline": true
-      },
-      {
-        "name": "Late",
-        "value": "Never Myst\nRaine maybe\nAlso Ivo",
-        "inline": true
-      }
-    ]
-  };
-
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
@@ -88,7 +55,41 @@ client.on('message', message => {
     }
 
     if(command === 'colotest') {
-        client.channels.get(spamChannel).send("everyone Colo starting now! BUT IT'S FAKE DO NOT TRUST IT THIS IS A TEST OMG", { embed });
+        const embed = {
+            "title": "Colo Starting!",
+            "color": 2713012,
+            "timestamp": "2021-03-05T07:02:05.369Z",
+            "footer": {
+              "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
+              "text": "ManifestFailure"
+            },
+            "thumbnail": {
+              "url": "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg"
+            },
+            "image": {
+              "url": "https://i.imgur.com/DehsKa7.jpg"
+            },
+            "author": {
+              "name": "Colo Announcer",
+              "url": "https://manifestfailure.com",
+              "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
+            },
+            "fields": [
+              {
+                "name": "AFK",
+                "value": afkPlayers.join("\n"),
+                "inline": true
+              },
+              {
+                "name": "Late",
+                "value": latePlayers.join("\n"),
+                "inline": true
+              }
+            ]
+          };
+        client.channels.get(spamChannel).send("@ManifestFailure Colo starting now! BUT IT'S FAKE DO NOT TRUST IT THIS IS A TEST OMG", { embed });
+        afkPlayers = [];
+        latePlayers = [];
     }
 });
 
