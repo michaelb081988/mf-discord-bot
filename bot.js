@@ -88,7 +88,7 @@ client.on('message', message => {
     }
 
     if(command === 'colotest') {
-        client.channels.get(spamChannel).send(embed);
+        client.channels.get(spamChannel).send("everyone Colo starting now! BUT IT'S FAKE DO NOT TRUST IT THIS IS A TEST OMG", { embed });
     }
 });
 
