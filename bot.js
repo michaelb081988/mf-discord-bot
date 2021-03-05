@@ -69,7 +69,7 @@ client.on('message', message => {
 
     if(command === 'list' || command === 'lists') {
         var embed = {
-            "title": "Colo Starting!",
+            "title": "Colo hype!",
             "color": 2713012,
             "timestamp": "2021-03-05T07:02:05.369Z",
             "footer": {
