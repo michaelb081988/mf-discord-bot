@@ -54,12 +54,12 @@ client.on('message', message => {
 	}
 
     if(command === 'afk') {
-        client.channels.get(spamChannel).send(message.author.username + " is going to be afk for this colo. Added to the list!");
+        message.reply(" is going to be afk for this colo. Added to the list!");
         afkPlayers.push(message.author.username);
     }
 
     if(command === 'late') {
-        client.channels.get(spamChannel).send(message.author.username + " is going to be a little late today. Please forgive them!");
+        message.reply(" is going to be a little late today. Please forgive them!");
         latePlayers.push(message.author.username);
     }
 
