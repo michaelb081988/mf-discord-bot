@@ -17,6 +17,7 @@ let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
+    client.channels.get(spamChannel).send("Restart done...");
 });
  
 // Waiting for messages
