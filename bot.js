@@ -37,7 +37,7 @@ client.on('message', message => {
 	}
 
     if(command === 'name') {
-        client.channels.get(spamChannel).send("Your name shows as " + client.channels.author);
+        client.channels.get(spamChannel).send("Your name shows as " + client.author.name);
     }
 });
 
