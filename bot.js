@@ -26,7 +26,9 @@ var coloLogo = [
 ];
 var coloImage = [
     "https://i.imgur.com/DehsKa7.jpg",
-    "https://i.imgur.com/evYE00g.png"
+    "https://i.imgur.com/evYE00g.png",
+    "https://sinoalice.global/include/images/ogp.jpg",
+    "https://mmoculture.com/wp-content/uploads/2018/11/SINoALICE-image.jpg"
 ];
 
 //Startup so we know it is running and connected
@@ -60,11 +62,15 @@ client.on('message', message => {
         client.channels.get(spamChannel).send(message.author.username + " is going to be a little late today. Please forgive them!");
         latePlayers.push(message.author.username);
     }
+
+    if(command === 'colo') {
+        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement! Once you are on the list however you cannot be removed, so let the officers know!");
+    }
 });
 
 // 30 minute colo warning // 9:30
 cron.schedule('0 30 9 * * *', () => {
-	client.channels.get(coloChannel).send("Colo starts in 30 minutes!!", { file:"https://i.imgur.com/DehsKa7.jpg" });
+	client.channels.get(coloChannel).send("Colo starts in 30 minutes!!", { file: coloImage[Math.floor(Math.random() * coloImage.length)] });
 });
 
 // Colo starting in 3 minutes! // 9:57
