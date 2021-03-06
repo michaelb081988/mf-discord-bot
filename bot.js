@@ -50,7 +50,7 @@ client.on('message', message => {
     }
 	
 	if(command === 'sorry') {
-		client.channels.get(coloChannel).send("I'm sorry I missed calling out colo. I will do it tomorrow I promise", { file: "https://i.ytimg.com/vi/9XfkZlcG8KU/maxresdefault.jpg" });
+		client.channels.get(coloChannel).send("OK, So Mani told me the wrong location, it's not my fault. Please blame him...", { file: "https://i.ytimg.com/vi/9XfkZlcG8KU/maxresdefault.jpg" });
 	}
 
     if(command === 'afk') {
@@ -145,7 +145,7 @@ cron.schedule('0 57 9 * * *', () => {
       };
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
-    client.channels.get(spamChannel).send("@everyone Colo starting now!", { embed });
+    client.channels.get(coloChannel).send("@everyone Colo starting now!", { embed });
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
