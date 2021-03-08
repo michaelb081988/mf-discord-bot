@@ -70,7 +70,7 @@ client.on('message', message => {
     }
 
     if(command === 'colo') {
-        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement! Once you are on the list however you cannot be removed, so let the officers know!");
+        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!");
     }
 	
     if(command === 'blood') {
@@ -86,6 +86,10 @@ client.on('message', message => {
 
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
+    }
+
+    if(command === 'test') {
+        message.reply(" " + message);
     }
 });
 
