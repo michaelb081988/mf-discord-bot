@@ -55,7 +55,7 @@ client.on('message', message => {
 		afkPlayers = afkPlayers.filter(e => e !== message.author.username);
 		return;
 	}
-        message.reply(" is going to be afk for this colo. Added to the list!");
+        message.reply(" is going to be afk for this colo. Added to the list! You can unset yourself as afk by doing !afk again...");
         afkPlayers.push(message.author.username);
     }
 
@@ -65,7 +65,7 @@ client.on('message', message => {
 		latePlayers = latePlayers.filter(e => e !== message.author.username);
 		return;
 	}
-        message.reply(" is going to be a little late tonight. Please forgive them!");
+        message.reply(" is going to be a little late tonight. Please forgive them! You can unset yourself as late by doing !late again...");
         latePlayers.push(message.author.username);
     }
 
