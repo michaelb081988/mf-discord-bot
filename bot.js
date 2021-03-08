@@ -110,6 +110,10 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
+cron.schedule('0 * * * * *', () => {
+    sendEvent(spamChannel, "This is a one minute message. Hope you muted this lol.");
+});
+
 function sendColo(text, reset = false) {
     var embed = {
         "title": "Colo Announcement",
