@@ -89,7 +89,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        message.channel.send("test");
+        sendEvent(message.channel.id, "Testing");
     }
 });
 
