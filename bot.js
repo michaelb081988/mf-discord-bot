@@ -89,7 +89,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        message.reply(" " + message);
+        message.channel.send("test");
     }
 });
 
