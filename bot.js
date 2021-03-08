@@ -110,9 +110,21 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
-cron.schedule('0 * * * * *', () => {
-    sendEvent(spamChannel, "This is a one minute message. Hope you muted this lol.");
+cron.schedule('0 */10 * * * *', () => {
+    if(guerrillaEvent) {
+        if(isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(19, 30) || isTime(15, 43)) {
+            sendEvent(spamChannel, "This will be the timer for the xp dungeon stuff...");
+        }
+    }
 });
+
+function isTime(hours, minutes) {
+    let date = new Date();
+    if(date.getHours() == hours && date.getMinutes() == minutes) {
+        return true;
+    }
+    return false;
+}
 
 function sendColo(text, reset = false) {
     var embed = {
