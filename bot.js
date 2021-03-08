@@ -110,10 +110,10 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
-cron.schedule('0 */10 * * * *', () => {
+cron.schedule('0 * * * * *', () => {
     if(guerrillaEvent) {
-        if(isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(19, 30) || isTime(15, 43)) {
-            sendEvent(spamChannel, "This will be the timer for the xp dungeon stuff...");
+        if(isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(19, 30) || isTime(15, 45)) {
+            sendEvent(spamChannel, "This will be the timer for the xp dungeon stuff...", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
         }
     }
 });
