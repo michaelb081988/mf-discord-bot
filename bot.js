@@ -108,7 +108,7 @@ cron.schedule('0 21 10 * * *', () => {
 
 function sendColo(channel, text, colo = false, message = null, reset = false) {
     var embed = {
-        "title": "Colo Starting!",
+        "title": "Colo Announcement",
         "color": 2713012,
         "timestamp": "2021-03-05T07:02:05.369Z",
         "footer": {
@@ -139,15 +139,15 @@ function sendColo(channel, text, colo = false, message = null, reset = false) {
           }
         ]
       };
-      if(reset) {
-        afkPlayers = ["~~      ~~"];
-        latePlayers = ["~~      ~~"];
-      }
-      if(colo) {
-              client.channels.get(channel).send(text, { embed });
-      } else {
-          message.reply(text, { embed });
-      }
+    if(reset) {
+    afkPlayers = ["~~      ~~"];
+    latePlayers = ["~~      ~~"];
+    }
+    if(colo) {
+    client.channels.get(channel).send(text, { embed });
+    } else {
+        message.reply(text, { embed });
+    }
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
