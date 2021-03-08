@@ -50,21 +50,21 @@ client.on('message', message => {
     }
 	
     if(command === 'afk') {
-	if(afkPlayers.includes(message.author.username)) {
-		message.reply(" is no longer going to be AFK. Removed from the list!!");
-		afkPlayers = afkPlayers.filter(e => e !== message.author.username);
-		return;
-	}
+        if(afkPlayers.includes(message.author.username)) {
+            message.reply(" is no longer going to be AFK. Removed from the list!!");
+            afkPlayers = afkPlayers.filter(e => e !== message.author.username);
+            return;
+        }
         message.reply(" is going to be afk for this colo. Added to the list! You can unset yourself as afk by doing !afk again...");
         afkPlayers.push(message.author.username);
     }
 
     if(command === 'late') {
-	if(latePlayers.includes(message.author.username)) {
-		message.reply(" is no longer going to be late. Removed from the list!!");
-		latePlayers = latePlayers.filter(e => e !== message.author.username);
-		return;
-	}
+        if(latePlayers.includes(message.author.username)) {
+            message.reply(" is no longer going to be late. Removed from the list!!");
+            latePlayers = latePlayers.filter(e => e !== message.author.username);
+            return;
+        }
         message.reply(" is going to be a little late tonight. Please forgive them! You can unset yourself as late by doing !late again...");
         latePlayers.push(message.author.username);
     }
@@ -74,50 +74,18 @@ client.on('message', message => {
     }
 	
     if(command === 'blood') {
-	if(bloodEvent) {
-	    message.reply(" blood event messages are disabled");
-	    bloodEvent = false;
-            return;
-	}
-	message.reply(" blood event messaged enabled!");
+        if(bloodEvent) {
+            message.reply(" blood event messages are now disabled. They will no longer broadcast at the end of colo.");
+            bloodEvent = false;
+                return;
+        }
+	message.reply(" blood event messages are now enabled! They will now appear at the end of colo.");
 	bloodEvent = true;
 	return;
     }
 
     if(command === 'list' || command === 'lists') {
-        var embed = {
-            "title": "Colo hype!",
-            "color": 2713012,
-            "timestamp": "2021-03-05T07:02:05.369Z",
-            "footer": {
-                "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg",
-                "text": "ManifestFailure"
-            },
-            "thumbnail": {
-                "url": coloLogo[Math.floor(Math.random() * coloLogo.length)]
-            },
-            "image": {
-                "url": coloImage[Math.floor(Math.random() * coloImage.length)]
-            },
-            "author": {
-                "name": "Colo Announcer",
-                "url": "https://manifestfailure.com",
-                "icon_url": "https://i.redd.it/6822bzc0uxu21.jpg"
-            },
-            "fields": [
-                {
-                "name": "AFK",
-                "value": afkPlayers.join("\n"),
-                "inline": true
-                },
-                {
-                "name": "Late",
-                "value": latePlayers.join("\n"),
-                "inline": true
-                }
-            ]
-        };
-        message.channel.send("Here is the current list for tonights colo!", { embed });
+        sendColo(message.channel, "Here is the current list for tonights colo!");
     }
 });
 
@@ -128,6 +96,17 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
+    sendColo(coloChannel, "@everyone Colo starting now!", true);
+});
+
+// Blood event, has to be a cron but then check if active during // 10:21
+cron.schedule('0 21 10 * * *', () => {
+    if(bloodEvent) {
+	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+	}
+});
+
+function sendColo(channel, message, reset = false) {
     var embed = {
         "title": "Colo Starting!",
         "color": 2713012,
@@ -160,17 +139,12 @@ cron.schedule('0 57 9 * * *', () => {
           }
         ]
       };
-    afkPlayers = ["~~      ~~"];
-    latePlayers = ["~~      ~~"];
-    client.channels.get(coloChannel).send("@everyone Colo starting now!", { embed });
-});
-
-// Blood event, has to be a cron but then check if active during // 10:21
-cron.schedule('0 21 10 * * *', () => {
-    if(bloodEvent) {
-	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
-	}
-});
+      if(reset) {
+        afkPlayers = ["~~      ~~"];
+        latePlayers = ["~~      ~~"];
+      }
+    client.channels.get(channel).send(message, { embed });
+}
 
 // This connects the bot to the Discord servers, without this nothing starts
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
