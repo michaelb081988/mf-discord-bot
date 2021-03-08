@@ -85,7 +85,7 @@ client.on('message', message => {
     }
 
     if(command === 'list' || command === 'lists') {
-        sendColo(message.channel, "Here is the current list for tonights colo!");
+        sendColo(message.channel, " here is the current list for tonights colo!", false, message, false);
     }
 });
 
@@ -96,7 +96,7 @@ cron.schedule('0 30 9 * * *', () => {
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    sendColo(coloChannel, "@everyone Colo starting now!", true);
+    sendColo(coloChannel, "@everyone Colo starting now!", true, null, true);
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
@@ -106,7 +106,7 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
-function sendColo(channel, message, reset = false) {
+function sendColo(channel, text, colo = false, message = null, reset = false) {
     var embed = {
         "title": "Colo Starting!",
         "color": 2713012,
@@ -143,7 +143,11 @@ function sendColo(channel, message, reset = false) {
         afkPlayers = ["~~      ~~"];
         latePlayers = ["~~      ~~"];
       }
-    client.channels.get(channel).send(message, { embed });
+      if(colo) {
+              client.channels.get(channel).send(text, { embed });
+      } else {
+          message.reply(text, { embed });
+      }
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
