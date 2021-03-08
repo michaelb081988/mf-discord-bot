@@ -84,6 +84,17 @@ client.on('message', message => {
         return;
     }
 
+    if(command === 'upgrade') {
+        if(guerrillaEvent) {
+            message.reply(" upgrade event messages are now disabled. They will no longer broadcast at the end of colo.");
+            guerrillaEvent = false;
+                return;
+        }
+        message.reply(" upgrade event messages are now enabled! They will now appear at the end of colo.");
+        guerrillaEvent = true;
+        return;
+    }
+
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
@@ -112,8 +123,8 @@ cron.schedule('0 21 10 * * *', () => {
 
 cron.schedule('0 * * * * *', () => {
     if(guerrillaEvent) {
-        if(isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(19, 30) || isTime(15, 45)) {
-            sendEvent(spamChannel, "This will be the timer for the xp dungeon stuff...", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
+        if(isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(19, 30)) {
+            sendEvent(eventChannel, "Time to farm up some fun! For the next 30 minutes the Weapon/Armor Upgrade Materials events are running.", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
         }
     }
 });
