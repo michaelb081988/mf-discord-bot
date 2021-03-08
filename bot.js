@@ -52,7 +52,7 @@ client.on('message', message => {
     if(command === 'afk') {
 	if(afkPlayers.includes(message.author.username)) {
 		message.reply(" is no longer going to be AFK. Removed from the list!!");
-		afkPlayers = afkPlayers.filter(e => e !-- message.author.username);
+		afkPlayers = afkPlayers.filter(e => e !== message.author.username);
 		return;
 	}
         message.reply(" is going to be afk for this colo. Added to the list!");
@@ -62,7 +62,7 @@ client.on('message', message => {
     if(command === 'late') {
 	if(latePlayers.includes(message.author.username)) {
 		message.reply(" is no longer going to be late. Removed from the list!!");
-		latePlayers = latePlayers.filter(e => e !-- message.author.username);
+		latePlayers = latePlayers.filter(e => e !== message.author.username);
 		return;
 	}
         message.reply(" is going to be a little late tonight. Please forgive them!");
