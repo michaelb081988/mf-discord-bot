@@ -49,16 +49,22 @@ client.on('message', message => {
         client.channels.get(spamChannel).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
 	
-	if(command === 'sorry') {
-		client.channels.get(coloChannel).send("OK, So Mani told me the wrong location, it's not my fault. Please blame him...", { file: "https://i.ytimg.com/vi/9XfkZlcG8KU/maxresdefault.jpg" });
-	}
-
     if(command === 'afk') {
+	if(afkPlayers.includes(message.author.username)) {
+		message.reply(" is no longer going to be AFK. Removed from the list!!");
+		afkPlayers = afkPlayers.filter(e => e !-- message.author.username);
+		return;
+	}
         message.reply(" is going to be afk for this colo. Added to the list!");
         afkPlayers.push(message.author.username);
     }
 
     if(command === 'late') {
+	if(latePlayers.includes(message.author.username)) {
+		message.reply(" is no longer going to be late. Removed from the list!!");
+		latePlayers = latePlayers.filter(e => e !-- message.author.username);
+		return;
+	}
         message.reply(" is going to be a little late tonight. Please forgive them!");
         latePlayers.push(message.author.username);
     }
