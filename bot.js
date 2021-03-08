@@ -34,7 +34,7 @@ var coloImage = [
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
-    client.channels.get(spamChannel).send("Restart done...");
+    sendEvent(spamChannel, "Restart done...");
 });
  
 // Waiting for messages
@@ -79,34 +79,34 @@ client.on('message', message => {
             bloodEvent = false;
                 return;
         }
-	message.reply(" blood event messages are now enabled! They will now appear at the end of colo.");
-	bloodEvent = true;
-	return;
+        message.reply(" blood event messages are now enabled! They will now appear at the end of colo.");
+        bloodEvent = true;
+        return;
     }
 
     if(command === 'list' || command === 'lists') {
-        sendColo(message.channel, " here is the current list for tonights colo!", false, message, false);
+        sendColo("Here is the current list for tonights colo!", false);
     }
 });
 
 // 30 minute colo warning // 9:30
 cron.schedule('0 30 9 * * *', () => {
-	client.channels.get(coloChannel).send("Colo starts in 30 minutes!!", { file: coloImage[Math.floor(Math.random() * coloImage.length)] });
+    sendEvent(coloChannel, "Colo starts in 30 minutes!!", coloImage[Math.floor(Math.random() * coloImage.length)]);
 });
 
 // Colo starting in 3 minutes! // 9:57
 cron.schedule('0 57 9 * * *', () => {
-    sendColo(coloChannel, "@everyone Colo starting now!", true, null, true);
+    sendColo("@everyone Colo starting now!", true);
 });
 
 // Blood event, has to be a cron but then check if active during // 10:21
 cron.schedule('0 21 10 * * *', () => {
     if(bloodEvent) {
-	    client.channels.get(coloChannel).send("Don't forget to spend your event Blood!", { file:"https://i.imgur.com/HKw7PQj.jpg" });
+        sendEvent(coloChannel, "Don't forget to spend your event Blood!", "https://i.imgur.com/HKw7PQj.jpg");
 	}
 });
 
-function sendColo(channel, text, colo = false, message = null, reset = false) {
+function sendColo(text, reset = false) {
     var embed = {
         "title": "Colo Announcement",
         "color": 2713012,
@@ -143,11 +143,15 @@ function sendColo(channel, text, colo = false, message = null, reset = false) {
     afkPlayers = ["~~      ~~"];
     latePlayers = ["~~      ~~"];
     }
-    if(colo) {
-    client.channels.get(channel).send(text, { embed });
-    } else {
-        message.reply(text, { embed });
+    client.channels.get(coloChannel).send(text, { embed });
+}
+
+function sendEvent(channel, text, image = null) {
+    if(image === null) {
+        client.channels.get(channel).send(text);
+        return;
     }
+    client.channels.get(channel).send(text, { file:image });
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
