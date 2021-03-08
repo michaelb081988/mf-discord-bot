@@ -11,7 +11,7 @@ let eventChannel = '762830413830946816'; // #events
 let spamChannel = '816677982562811944'; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
-let bloodEvent = true; // Guild Box O' Grimoire // AKA Trash Event
+let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
 
 //Keep a list of AFK/Late players to show during colo live message!
@@ -71,6 +71,17 @@ client.on('message', message => {
 
     if(command === 'colo') {
         message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement! Once you are on the list however you cannot be removed, so let the officers know!");
+    }
+	
+    if(command === 'blood') {
+	if(bloodEvent) {
+	    message.reply(" blood event messages are disabled");
+	    bloodEvent = false;
+            return;
+	}
+	message.reply(" blood event messaged enabled!");
+	bloodEvent = true;
+	return;
     }
 
     if(command === 'list' || command === 'lists') {
