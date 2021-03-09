@@ -171,8 +171,8 @@ function sendColo(text, reset = false) {
         ]
       };
     if(reset) {
-    afkPlayers = ["~~      ~~"];
-    latePlayers = ["~~      ~~"];
+        afkPlayers = ["~~      ~~"];
+        latePlayers = ["~~      ~~"];
     }
     client.channels.get(coloChannel).send(text, { embed });
 }
