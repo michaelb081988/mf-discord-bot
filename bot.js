@@ -3,10 +3,12 @@ const client = new Discord.Client(); //Client connector
 const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X time
 
 const { Pool, Client } = require('pg');
-const connectionString = process.env.DATABASE_URL;
 
 const db = new Client({
-    connectionString,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
 });
 
 //Set time zone to me so i can know when things are supposed to be done
