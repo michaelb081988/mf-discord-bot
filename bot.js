@@ -45,12 +45,12 @@ client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
     db.connect();
-    db
-      .query("SELECT * FROM GUILDS")
-      .then(res => {
-        sendEvent(spamChannel, res.rows[0]['name']);
-      })
-      .catch()
+    // db
+    //   .query("SELECT * FROM GUILDS")
+    //   .then(res => {
+    //     sendEvent(spamChannel, res.rows[0]['name']);
+    //   })
+    //   .catch()
 });
  
 // Waiting for messages
@@ -61,6 +61,16 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     
     let date = new Date();
+
+    if(command === 'win') {
+        if(doesGuildExist(args[0])) {
+            message.reply(" found it");
+            return;
+        }
+        message.reply(" not found");
+        return;
+    }
+
     if (command === 'hello') {
         client.channels.get(message.channel.id).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
@@ -202,6 +212,14 @@ function sendEvent(channel, text, image = null) {
         return;
     }
     client.channels.get(channel).send(text, { file:image });
+}
+
+function doesGuildExist(guild) {
+    db
+    .query("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = " + guild + ")")
+    .then(res => { if(res) return true });
+
+    return false;
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
