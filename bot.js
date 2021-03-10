@@ -47,7 +47,7 @@ client.on('ready', () => {
     db.connect();
     db
       .query("SELECT * FROM GUILDS")
-      .then(res => console.log(res.rows[0]))
+      .then(res => console.log(res.rows[0]['name']))
       .catch()
 });
  
