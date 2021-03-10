@@ -218,8 +218,7 @@ function sendEvent(channel, text, image = null) {
 function doesGuildExist(guild) {
     db
     .query("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = '" + guild + "')")
-    .then(res => { if(res) return true });
-    return false;
+    .then(res => {return res});
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
