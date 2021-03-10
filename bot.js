@@ -46,7 +46,7 @@ client.on('message', message => {
     
     let date = new Date();
     if (command === 'hello') {
-        client.channels.get(spamChannel).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
+        client.channels.get(message.channel.id).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
 	
     if(command === 'afk') {
@@ -70,7 +70,7 @@ client.on('message', message => {
     }
 
     if(command === 'colo') {
-        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!");
+        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!\n!blood will turn on/off the blood event notifications.\n!upgrade will turn off the spam in the #events channel.");
     }
 	
     if(command === 'blood') {
