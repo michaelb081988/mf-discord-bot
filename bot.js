@@ -47,7 +47,7 @@ client.on('ready', () => {
     db.connect();
     db.query('SELECT NOW()', (err, res) => {
         console.log(err, res);
-        sendEvent(spamChannel, "Connected to DB...:");
+        sendEvent(spamChannel, "Connected to DB...");
     });
 });
  
