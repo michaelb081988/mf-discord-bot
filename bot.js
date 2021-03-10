@@ -5,10 +5,10 @@ const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X tim
 const { Pool, Client } = require('pg');
 const connectionString = process.env.CONNECTION_STRING;
 
-const client = new Client({
+const db = new Client({
     connectionString,
 });
-client.connect();
+db.connect();
 
 //Set time zone to me so i can know when things are supposed to be done
 process.env.TZ = 'Australia/Perth'
@@ -43,7 +43,7 @@ var coloImage = [
 client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
-    client.query('SELECT NOW()', (err, res) => {
+    db.query('SELECT NOW()', (err, res) => {
         console.log(err, res);
         sendEvent(spamChannel, res);
     });
