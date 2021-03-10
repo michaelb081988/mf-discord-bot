@@ -70,7 +70,9 @@ client.on('message', message => {
     }
 
     if(command === 'colo') {
-        message.reply(" I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!\n!blood will turn on/off the blood event notifications.\n!upgrade will turn off the spam in the #events channel.");
+        message.reply(` I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!
+        !blood will turn on/off the blood event notifications.
+        !upgrade will turn off the spam in the #events channel.`);
     }
 	
     if(command === 'blood') {
