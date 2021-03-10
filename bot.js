@@ -63,7 +63,7 @@ client.on('message', message => {
     let date = new Date();
 
     if(command === 'win') {
-        message.reply("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = '" + args[0] + "')");
+        message.reply(JSON.stringify(doesGuildExist(args[0])));
         if(doesGuildExist(args[0])) {
             message.reply(" found it");
             return;
