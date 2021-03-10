@@ -12,7 +12,7 @@ const db = new Client({
 });
 
 //Set time zone to me so i can know when things are supposed to be done
-process.env.TZ = 'Australia/Perth'
+process.env.TZ = 'Australia/Perth';
 
 //List of channels
 let coloChannel = '762832294259195946'; // #colosseum
@@ -45,10 +45,10 @@ client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
     db.connect();
-    db.query('SELECT NOW()', (err, res) => {
-        console.log(err, res);
-        sendEvent(spamChannel, "Connected to DB...");
-    });
+    db
+      .query("SELECT * FROM GUILDS")
+      .then(res => sendEvent(spamChannel, res.rows[0][0]))
+      .catch()
 });
  
 // Waiting for messages
