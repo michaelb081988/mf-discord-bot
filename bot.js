@@ -121,6 +121,7 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
+// Check 
 cron.schedule('0 * * * * *', () => {
     if(guerrillaEvent) {
         if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28)) {
