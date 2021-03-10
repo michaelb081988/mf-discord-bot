@@ -48,7 +48,7 @@ client.on('ready', () => {
     db
       .query("SELECT * FROM GUILDS")
       .then(res => {
-        sendEvent(spamChannel, JSON.stringify(res.rows[0]['Name']));
+        sendEvent(spamChannel, res.rows[0]['name']);
       })
       .catch()
 });
