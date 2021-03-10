@@ -63,6 +63,7 @@ client.on('message', message => {
     let date = new Date();
 
     if(command === 'win') {
+        message.reply("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = " + args[0] + ")");
         if(doesGuildExist(args[0])) {
             message.reply(" found it");
             return;
@@ -218,7 +219,6 @@ function doesGuildExist(guild) {
     db
     .query("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = " + guild + ")")
     .then(res => { if(res) return true });
-
     return false;
 }
 
