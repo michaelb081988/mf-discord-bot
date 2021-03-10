@@ -48,7 +48,7 @@ client.on('ready', () => {
     db
       .query("SELECT * FROM GUILDS")
       .then(res => {
-          console.log(res.rows[0].fields[1].name);
+        sendEvent(spamChannel, JSON.stringify(res.rows[0]));
       })
       .catch()
 });
