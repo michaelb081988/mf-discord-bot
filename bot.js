@@ -2,6 +2,14 @@ const Discord = require('discord.js'); //DiscordJS base
 const client = new Discord.Client(); //Client connector
 const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X time
 
+const { Pool, Client } = require('pg');
+const connectionString = process.env.CONNECTION_STRING;
+
+const client = new Client({
+    connectionString,
+});
+client.connect();
+
 //Set time zone to me so i can know when things are supposed to be done
 process.env.TZ = 'Australia/Perth'
 
@@ -34,7 +42,11 @@ var coloImage = [
 //Startup so we know it is running and connected
 client.on('ready', () => {
     console.log('I am ready!');
-    sendEvent(spamChannel, "Restart done...");
+    sendEvent(spamChannel, "Startup Done...");
+    client.query('SELECT NOW()', (err, res) => {
+        console.log(err, res);
+        sendEvent(spamChannel, res);
+    });
 });
  
 // Waiting for messages
