@@ -42,7 +42,7 @@ var coloImage = [
 client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
-    await db.connect();
+    db.connect();
     db.query('SELECT NOW()', (err, res) => {
         console.log(err, res);
         sendEvent(spamChannel, res);
