@@ -217,17 +217,17 @@ function doesGuildExist(guild) {
 
 function isEventActive(event) {
     var active = false;
-    const query = {
-        text: 'SELECT * FROM EVENTS',
-        values: [event],
-    }
-    db.query(query, (err, res) => {
-        if (err) {
-            console.log(err.stack)
-          } else {
-            console.log(res.rows[0])
-          }
-    });
+    // const query = {
+    //     text: 'SELECT * FROM EVENTS',
+    //     values: [event],
+    // }
+    // db.query(query, (err, res) => {
+    //     if (err) {
+    //         console.log(err.stack)
+    //       } else {
+    //         console.log(res.rows[0])
+    //       }
+    // });
     return active;
 }
 
