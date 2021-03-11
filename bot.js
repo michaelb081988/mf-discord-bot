@@ -159,7 +159,7 @@ cron.schedule('0 * * * * *', () => {
     }
 
     if(conquestEvent) { //Check conquest event enabled.
-	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,22)) {
+	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58)) {
 	    sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
 	}
     }
