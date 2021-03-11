@@ -222,7 +222,11 @@ function isEventActive(event) {
         values: [event],
     }
     db.query(query, (err, res) => {
-        active = res.rows[0]['active'];
+        if (err) {
+            console.log(err.stack)
+          } else {
+            console.log(res.rows[0])
+          }
     });
     return active;
 }
