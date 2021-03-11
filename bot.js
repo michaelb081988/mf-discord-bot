@@ -153,12 +153,13 @@ cron.schedule('0 21 10 * * *', () => {
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
     if(guerrillaEvent) { // Check event enabled. To be moved to database
-        if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28) {
+        if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28)) {
             sendEvent(eventChannel, "Time to farm up some fun! For the next 30 minutes the Weapon/Armor Upgrade Materials events are running.", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
         }
     }
+
     if(conquestEvent) { //Check conquest event enabled.
-	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,15)) {
+	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,20)) {
 	    sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
 	}
     }
