@@ -45,12 +45,12 @@ client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
     db.connect();
-    // db
-    //   .query("SELECT * FROM GUILDS")
-    //   .then(res => {
-    //     sendEvent(spamChannel, res.rows[0]['name']);
-    //   })
-    //   .catch()
+     db
+       .query("SELECT * FROM EVENTS")
+       .then(res => {
+         sendEvent(spamChannel, res.rows[0]['name']);
+       })
+       .catch()
 });
  
 // Waiting for messages
@@ -228,4 +228,4 @@ function isEventActive(event) {
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
-client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
+client.login(process.env.BOT_TOKEN); //BOT_TOKEN is the Client Secret
