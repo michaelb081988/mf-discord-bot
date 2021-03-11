@@ -45,12 +45,6 @@ client.on('ready', () => {
     console.log('I am ready!');
     sendEvent(spamChannel, "Startup Done...");
     db.connect();
-     db
-       .query("SELECT * FROM EVENTS")
-       .then(res => {
-         sendEvent(spamChannel, res.rows[0]['name']);
-       })
-       .catch()
 });
  
 // Waiting for messages
@@ -224,8 +218,7 @@ function doesGuildExist(guild) {
 function isEventActive(event) {
     var active = false;
     const query = {
-        name: 'fetch-event-active',
-        text: 'SELECT * FROM EVENTS WHERE name = $1',
+        text: 'SELECT * FROM EVENTS',
         values: [event],
     }
     db.query(query, (err, res) => {
