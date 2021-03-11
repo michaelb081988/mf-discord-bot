@@ -23,10 +23,11 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; // Squirming Darkness Weapon/Armor // XP Dungeon
 let conquestEvent = true; // Conquest Events, there are so many of them :sigh
-let currentConquest = 0; // Current conquest active
+let currentConquest = 1; // Current conquest active
 
 let conquestImages = [
-    "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png"
+    "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png", //Jörmungandr // 0
+    "https://i.imgur.com/ZI15o2d.png" // Belial // 1
 ];
 
 //Keep a list of AFK/Late players to show during colo live message!
@@ -129,7 +130,8 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        message.reply(" is a big dumb dumb....\nUpgrade event: " + isEventActive('upgrade'));
+        // message.reply(" is a big dumb dumb....\nUpgrade event: " + isEventActive('upgrade'));
+        sendEvent(spamChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
     }
 });
 
