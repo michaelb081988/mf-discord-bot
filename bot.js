@@ -129,9 +129,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        if(isEventActive(upgrade)) {
-            sendEvent(message.channel.id, "Testing");
-        }
+        message.reply(isEventActive(upgrade));
     }
 });
 
@@ -226,7 +224,7 @@ function doesGuildExist(guild) {
 function isEventActive(event) {
     db
     .query("SELECT active FROM EVENTS WHERE name = '" + event + "'")
-    .then(res => { return res[0]['active'] });
+    .then(res => { return JSON.stringify(res.rows) });
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
