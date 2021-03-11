@@ -129,7 +129,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        message.reply(isEventActive(upgrade));
+        message.reply(isEventActive("upgrade"));
     }
 });
 
