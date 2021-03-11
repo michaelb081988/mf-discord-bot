@@ -129,7 +129,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        message.reply(" is a big dumb dumb....\n" + isEventActive("upgrade"));
+        message.reply(" is a big dumb dumb....\nUpgrade event: " + isEventActive('upgrade'));
     }
 });
 
@@ -223,9 +223,9 @@ function doesGuildExist(guild) {
 
 function isEventActive(event) {
     var active = false;
-    db
-    .query("SELECT * FROM EVENTS")
-    .then(res => active = res.rows[0]['active']);
+    db.query("SELECT * FROM EVENTS WHERE name '" + event + "'", (err, res) => {
+        active = res.rows[0]['active'];
+    });
     return active;
 }
 
