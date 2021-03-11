@@ -224,7 +224,11 @@ function doesGuildExist(guild) {
 function isEventActive(event) {
     var active = "SELECT * FROM EVENTS WHERE name = '" + event + "'";
     db.query("SELECT * FROM EVENTS WHERE name = '" + event + "'", (err, res) => {
-        active = JSON.stringify(res.rows[0]);
+        if(err) {
+            active = err.stack;
+        } else {
+            active = JSON.stringify(res.rows[0]);
+        }
     });
     return active;
 }
