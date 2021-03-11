@@ -21,19 +21,25 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
-let guerrillaEvent = true; //Squirming Darkness Weapon/Armor // XP Dungeon
+let guerrillaEvent = true; // Squirming Darkness Weapon/Armor // XP Dungeon
+let conquestEvent = true; // Conquest Events, there are so many of them :sigh
+let currentConquest = 1; // Current conquest active
+
+let conquestImages = [
+    "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png"
+];
 
 //Keep a list of AFK/Late players to show during colo live message!
-var latePlayers = ["~~      ~~"];
-var afkPlayers = ["~~      ~~"];
+let latePlayers = ["~~      ~~"];
+let afkPlayers = ["~~      ~~"];
 
 //A list of random images to use for colo announcements
-var coloLogo = [
+let coloLogo = [
     "https://media.pocketgamer.biz/2020/3/103913/sinoalice-r225x.jpg",
     "https://i.pinimg.com/originals/c9/03/d5/c903d5c29570b91c6b20284a64ba7874.png",
     "https://i.pinimg.com/originals/fc/ee/37/fcee373c2eb654238ba23ea082144e93.png"
 ];
-var coloImage = [
+let coloImage = [
     "https://i.imgur.com/DehsKa7.jpg",
     "https://i.imgur.com/evYE00g.png",
     "https://sinoalice.global/include/images/ogp.jpg",
@@ -144,12 +150,17 @@ cron.schedule('0 21 10 * * *', () => {
 	}
 });
 
-// Check 
+// Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
-    if(guerrillaEvent) {
-        if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,30) {
+    if(guerrillaEvent) { // Check event enabled. To be moved to database
+        if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28) {
             sendEvent(eventChannel, "Time to farm up some fun! For the next 30 minutes the Weapon/Armor Upgrade Materials events are running.", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
         }
+    }
+    if(conquestEvent) { //Check conquest event enabled.
+	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,15)) {
+	    sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
+	}
     }
 });
 
