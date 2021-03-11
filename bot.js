@@ -23,7 +23,7 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
 let guerrillaEvent = true; // Squirming Darkness Weapon/Armor // XP Dungeon
 let conquestEvent = true; // Conquest Events, there are so many of them :sigh
-let currentConquest = 1; // Current conquest active
+let currentConquest = 0; // Current conquest active
 
 let conquestImages = [
     "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png"
@@ -159,7 +159,7 @@ cron.schedule('0 * * * * *', () => {
     }
 
     if(conquestEvent) { //Check conquest event enabled.
-	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,20)) {
+	if(isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58) || isTime(1,22)) {
 	    sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
 	}
     }
