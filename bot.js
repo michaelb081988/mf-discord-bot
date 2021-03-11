@@ -222,9 +222,11 @@ function doesGuildExist(guild) {
 }
 
 function isEventActive(event) {
-    return db
+    var active = false;
+    db
     .query("SELECT * FROM EVENTS")
-    .then(res => res.rows[0]['active']);
+    .then(res => active = res.rows[0]['active']);
+    return active;
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
