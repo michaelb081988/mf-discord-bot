@@ -94,6 +94,13 @@ client.on('message', message => {
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
+
+    if(command === 'match') {
+        if(args.length == 0) { sayMatchInfo(); }
+        if(args.length != 2) { message.reply("Missing info. To use type !match guildname win/loss!"); return; }
+        if(args[1] != "win" && args[1] != "loss") { message.reply("Win/Loss is not correct. To use type !match guildname win/loss!"); return; }
+        addWinLoss(args[0], args[1], message);
+    }
 	
     if(command === 'events') {
         getActiveEvents(message);
@@ -207,6 +214,54 @@ function getActiveEvents(message) {
         message.reply(" there was an error. Tell Mani!");
         console.log(err.stack);
     })
+}
+
+async function addWinLoss(guild, result, message) {
+    //First look to see if guild exists in DB
+    const query = {
+        text: "INSERT INTO matches(guild,result,date,author) VALUES($1, $2, $3, $4) RETURNING *",
+        values: [guild, result, '11/22/3333', message.author.username]
+    };
+    db.query(query)
+    .then(res => {
+        sayWinLoss(guild, message.channel.id);
+    });
+}
+
+async function sayWinLoss(guild, channel) {
+    const win = {
+        text: "SELECT * FROM matches WHERE guild = $1 AND result = $2",
+        values: [guild, 'win']
+    };
+    const loss = {
+        text: "SELECT * FROM matches WHERE guild = $1 AND result = $2",
+        values: [guild, 'loss']
+    };
+
+    let wins = 0;
+    let losses = 0;
+
+    await db.query(win).then(res => wins = res.rows.length);
+    await db.query(loss).then(res => losses = res.rows.length);
+    sendEvent(channel, "Against " + guild + " we have won " + wins + " and lost " + losses);
+}
+
+async function sayMatchInfo() {
+    const win = {
+        text: "SELECT * FROM matches WHERE result = $1",
+        values: ['win']
+    };
+    const loss = {
+        text: "SELECT * FROM matches WHERE result = $1",
+        values: ['loss']
+    };
+
+    let wins = 0;
+    let losses = 0;
+
+    await db.query(win).then(res => wins = res.rows.length);
+    await db.query(loss).then(res => losses = res.rows.length);
+    sendEvent(channel, "In total we have tracked " + wins + " wins and " + losses + " losses.");
 }
 
 function getAndSendEvent(message, event) {
