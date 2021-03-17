@@ -128,6 +128,10 @@ client.on('message', message => {
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
+	
+    if(command === 'events') {
+        getActiveEvents(message);
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -238,6 +242,23 @@ function isEventActive(event) {
     //       }
     // });
     return active;
+}
+
+function getActiveEvents(message) {
+    let events = "";
+    db
+    .query("SELECT * FROM EVENTS")
+    .then(res => {
+        for (var i = 0; i < res.rows.length; i++) {
+            let active = res.rows[i]['active'];
+            events += res.rows[i]['name'] + " is currently: " + ((res.rows[i]['active']) ? 'Enabled' : 'Disabled') + "\n";
+        }
+        sendEvent(message.channel.id, "Current events...\n" + events);
+    })
+    .catch(err => {
+        message.reply(" there was an error. Tell Mani!");
+        console.log(err.stack);
+    })
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
