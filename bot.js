@@ -96,7 +96,7 @@ client.on('message', message => {
     }
 
     if(command === 'match') {
-        if(args.length == 0) { sayMatchInfo(); }
+        if(args.length == 0) { sayMatchInfo(message.channel.id); return; }
         if(args.length != 2) { message.reply("Missing info. To use type !match guildname win/loss!"); return; }
         if(args[1] != "win" && args[1] != "loss") { message.reply("Win/Loss is not correct. To use type !match guildname win/loss!"); return; }
         addWinLoss(args[0], args[1], message);
@@ -246,7 +246,7 @@ async function sayWinLoss(guild, channel) {
     sendEvent(channel, "Against " + guild + " we have won " + wins + " and lost " + losses);
 }
 
-async function sayMatchInfo() {
+async function sayMatchInfo(channel) {
     const win = {
         text: "SELECT * FROM matches WHERE result = $1",
         values: ['win']
