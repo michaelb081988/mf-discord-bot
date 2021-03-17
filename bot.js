@@ -108,7 +108,7 @@ client.on('message', message => {
     }
 
     if(command === 'test') {
-        let m = sendEvent(spamChannel, "This is a test");
+        let m = client.channels.get(message.channel.id).send("This is a test");
         m.edit("This is the edited one");
     }
 });
@@ -191,9 +191,10 @@ function sendColo(text, reset = false) {
 
 function sendEvent(channel, text, image = null) {
     if(image === null) {
-        return client.channels.get(channel).send(text);
+        client.channels.get(channel).send(text);
+        return;
     }
-    return client.channels.get(channel).send(text, { file:image });
+    client.channels.get(channel).send(text, { file:image });
 }
 
 function getActiveEvents(message) {
