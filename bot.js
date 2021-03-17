@@ -20,8 +20,6 @@ let eventChannel = '762830413830946816'; // #events
 let spamChannel = '816677982562811944'; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
-let bloodEvent = false; // Guild Box O' Grimoire // AKA Trash Event
-let guerrillaEvent = true; // Squirming Darkness Weapon/Armor // XP Dungeon
 let conquestEvent = true; // Conquest Events, there are so many of them :sigh
 let currentConquest = 1; // Current conquest active
 
@@ -108,6 +106,11 @@ client.on('message', message => {
         }
         setEventStatus(message, args[0]);
     }
+
+    if(command === 'test') {
+        let m = sendEvent(spamChannel, "This is a test");
+        m.edit("This is the edited one");
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -188,10 +191,9 @@ function sendColo(text, reset = false) {
 
 function sendEvent(channel, text, image = null) {
     if(image === null) {
-        client.channels.get(channel).send(text);
-        return;
+        return client.channels.get(channel).send(text);
     }
-    client.channels.get(channel).send(text, { file:image });
+    return client.channels.get(channel).send(text, { file:image });
 }
 
 function getActiveEvents(message) {
