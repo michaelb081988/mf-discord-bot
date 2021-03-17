@@ -243,10 +243,14 @@ function setEventStatus(message, event) {
     }
     db.query(query)
     .then(res => {
+        if(res.rows.length == 0) {
+            message.reply(" event not found. !events to get a full list!");
+            return;
+        }
         sendEvent(message.channel.id, JSON.stringify(res.rows[0]));
     })
     .catch(err => {
-        message.reply(" event not found. !events to get a full list!");
+        message.reply(" there was an error. Tell Mani!");
     })
 }
 
