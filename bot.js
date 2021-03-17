@@ -252,8 +252,7 @@ function setEventStatus(message, event) {
         let active = res.rows[0]['active'];
         db.query('UPDATE EVENTS SET active = $1 WHERE slug = $2', [!active, res.rows[0]['slug']])
         .then(resup => {
-            //Flip active as this is now what it is
-            if(!active) { //Was active, now inactive
+            if(active) { //Was active, now inactive
                 sendEvent(message.channel.id, res.rows[0]['name'] + " is now disabled.");
             } else {
                 sendEvent(message.channel.id, res.rows[0]['name'] + " is now active!");
