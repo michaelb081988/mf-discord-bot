@@ -130,6 +130,10 @@ client.on('message', message => {
         }
         setEventStatus(message, args[0]);
     }
+
+    if(command === 'test') {
+        getAndSendEvent(message, args[0]);
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -234,6 +238,19 @@ function getActiveEvents(message) {
         message.reply(" there was an error. Tell Mani!");
         console.log(err.stack);
     })
+}
+
+function getAndSendEvent(message, event) {
+    const query = {
+        text: "SELECT * FROM EVENTS WHERE slug = $1",
+        values: [event]
+    }
+    db.query(query)
+    .then(res => {
+        if(res.rows[0]['active']) {
+            sendEvent(spamChannel, res.rows[0]['message'], res.rows[0]['image']);
+        }
+    });
 }
 
 function setEventStatus(message, event) {
