@@ -243,11 +243,26 @@ function setEventStatus(message, event) {
     }
     db.query(query)
     .then(res => {
+        //Check if it exists or not. If not, notify and escape
         if(res.rows.length == 0) {
             message.reply(" event not found. !events to get a full list!");
             return;
         }
-        sendEvent(message.channel.id, JSON.stringify(res.rows[0]));
+        //Check if active or not so we can give it the old swaparoo
+        let active = res.rows[0]['active'];
+        db.query('UPDATE EVENTS SET active = $1 WHERE slug = $2', [!active, res.rows[0]['slug']])
+        .then(resup => {
+            //Flip active as this is now what it is
+            if(!active) { //Was active, now inactive
+                sendEvent(message.channel.id, res.rows[0]['name'] + " is now disabled.");
+            } else {
+                sendEvent(message.channel.id, res.rows[0]['name'] + " is now active!");
+            }
+        })
+        .catch(err => {
+            message.reply(" there was an error. Tell Mani!");
+        })
+        
     })
     .catch(err => {
         message.reply(" there was an error. Tell Mani!");
