@@ -128,11 +128,6 @@ client.on('message', message => {
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
-
-    if(command === 'test') {
-        // message.reply(" is a big dumb dumb....\nUpgrade event: " + isEventActive('upgrade'));
-        sendEvent(spamChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
-    }
 });
 
 // 30 minute colo warning // 9:30
