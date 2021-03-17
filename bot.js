@@ -93,28 +93,6 @@ client.on('message', message => {
         !upgrade will turn off the spam in the #events channel.`);
     }
 	
-    if(command === 'blood') {
-        if(bloodEvent) {
-            message.reply(" blood event messages are now disabled. They will no longer broadcast at the end of colo.");
-            bloodEvent = false;
-                return;
-        }
-        message.reply(" blood event messages are now enabled! They will now appear at the end of colo.");
-        bloodEvent = true;
-        return;
-    }
-
-    if(command === 'upgrade') {
-        if(guerrillaEvent) {
-            message.reply(" upgrade event messages are now disabled. They will no longer broadcast at the end of colo.");
-            guerrillaEvent = false;
-                return;
-        }
-        message.reply(" upgrade event messages are now enabled! They will now appear at the end of colo.");
-        guerrillaEvent = true;
-        return;
-    }
-
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
@@ -129,10 +107,6 @@ client.on('message', message => {
             return;
         }
         setEventStatus(message, args[0]);
-    }
-
-    if(command === 'test') {
-        getAndSendEvent(message, args[0]);
     }
 });
 
@@ -228,6 +202,7 @@ function getActiveEvents(message) {
             let active = res.rows[i]['active'];
             events += res.rows[i]['name'] + "(" + res.rows[i]['slug'] + ") is currently: " + ((res.rows[i]['active']) ? 'Enabled' : 'Disabled') + "\n";
         }
+        events += "To enable/disable an event use !event name. For example, !event blood";
         sendEvent(message.channel.id, "Current events...\n" + events);
     })
     .catch(err => {
