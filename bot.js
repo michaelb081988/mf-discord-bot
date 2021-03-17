@@ -126,7 +126,9 @@ client.on('message', message => {
     if(command === 'event') {
         if(args.length == 0) {
             sendEvent(message.channel.id, "No event name given. !events to see all available events.");
+            return;
         }
+        setEventStatus(message, args[0]);
     }
 });
 
@@ -220,8 +222,7 @@ function sendEvent(channel, text, image = null) {
 
 function getActiveEvents(message) {
     let events = "";
-    db
-    .query("SELECT * FROM EVENTS")
+    db.query("SELECT * FROM EVENTS")
     .then(res => {
         for (var i = 0; i < res.rows.length; i++) {
             let active = res.rows[i]['active'];
@@ -236,7 +237,17 @@ function getActiveEvents(message) {
 }
 
 function setEventStatus(message, event) {
+    const query = {
+        text: "SELECT * FROM EVENTS WHERE slug = $1",
+        values: [event]
+    }
+    db.query(query)
+    .then(res => {
+        sendEvent(message.channel.id, JSON.stringify(res.rows[0]));
+    })
+    .catch(err => {
 
+    })
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
