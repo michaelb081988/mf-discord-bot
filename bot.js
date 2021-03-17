@@ -246,7 +246,7 @@ function setEventStatus(message, event) {
         sendEvent(message.channel.id, JSON.stringify(res.rows[0]));
     })
     .catch(err => {
-
+        message.reply(" event not found. !events to get a full list!");
     })
 }
 
