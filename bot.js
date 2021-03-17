@@ -63,16 +63,6 @@ client.on('message', message => {
     
     let date = new Date();
 
-    if(command === 'win') {
-        message.reply(JSON.stringify(doesGuildExist(args[0])));
-        if(doesGuildExist(args[0])) {
-            message.reply(" found it");
-            return;
-        }
-        message.reply(" not found");
-        return;
-    }
-
     if (command === 'hello') {
         client.channels.get(message.channel.id).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
@@ -131,6 +121,12 @@ client.on('message', message => {
 	
     if(command === 'events') {
         getActiveEvents(message);
+    }
+
+    if(command === 'event') {
+        if(args.length == 0) {
+            sendEvent(message.channel.id, "No event name given. !events to see all available events.");
+        }
     }
 });
 
@@ -222,28 +218,6 @@ function sendEvent(channel, text, image = null) {
     client.channels.get(channel).send(text, { file:image });
 }
 
-function doesGuildExist(guild) {
-    db
-    .query("SELECT EXISTS(SELECT * FROM GUILDS WHERE name = '" + guild + "')")
-    .then(res => {return res});
-}
-
-function isEventActive(event) {
-    var active = false;
-    // const query = {
-    //     text: 'SELECT * FROM EVENTS',
-    //     values: [event],
-    // }
-    // db.query(query, (err, res) => {
-    //     if (err) {
-    //         console.log(err.stack)
-    //       } else {
-    //         console.log(res.rows[0])
-    //       }
-    // });
-    return active;
-}
-
 function getActiveEvents(message) {
     let events = "";
     db
@@ -251,7 +225,7 @@ function getActiveEvents(message) {
     .then(res => {
         for (var i = 0; i < res.rows.length; i++) {
             let active = res.rows[i]['active'];
-            events += res.rows[i]['name'] + " is currently: " + ((res.rows[i]['active']) ? 'Enabled' : 'Disabled') + "\n";
+            events += res.rows[i]['name'] + "(" + res.rows[i]['slug'] + ") is currently: " + ((res.rows[i]['active']) ? 'Enabled' : 'Disabled') + "\n";
         }
         sendEvent(message.channel.id, "Current events...\n" + events);
     })
@@ -259,6 +233,10 @@ function getActiveEvents(message) {
         message.reply(" there was an error. Tell Mani!");
         console.log(err.stack);
     })
+}
+
+function setEventStatus(message, event) {
+
 }
 
 // This connects the bot to the Discord servers, without this nothing starts
