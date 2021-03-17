@@ -148,23 +148,19 @@ cron.schedule('0 57 9 * * *', () => {
 
 // Blood event, has to be a cron but then check if active during // 10:21
 cron.schedule('0 21 10 * * *', () => {
-    if(bloodEvent) {
-        sendEvent(coloChannel, "Don't forget to spend your event Blood!", "https://i.imgur.com/HKw7PQj.jpg");
-	}
+    getAndSendEvent(message, 'blood');
 });
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
-    if(guerrillaEvent) { // Check event enabled. To be moved to database
-        if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28)) {
-            sendEvent(eventChannel, "Time to farm up some fun! For the next 30 minutes the Weapon/Armor Upgrade Materials events are running.", "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/7/71/Guerrilla_weapon.png");
-        }
+    if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28)) {
+        getAndSendEvent(message, 'upgrade');
     }
 
     if(conquestEvent) { //Check conquest event enabled.
-	if(isTime(1, 28) || isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58)) {
-	    sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
-	}
+        if(isTime(1, 28) || isTime(3, 28) || isTime(5, 28) || isTime(7, 28) || isTime(9, 28) || isTime(11, 28) || isTime(7, 58)) {
+            sendEvent(eventChannel, "Conquest Event is live for the next 30 minutes!", conquestImages[currentConquest]);
+        }
     }
 });
 
@@ -248,7 +244,7 @@ function getAndSendEvent(message, event) {
     db.query(query)
     .then(res => {
         if(res.rows[0]['active']) {
-            sendEvent(spamChannel, res.rows[0]['message'], res.rows[0]['image']);
+            sendEvent(eventChannel, res.rows[0]['message'], res.rows[0]['image']);
         }
     });
 }
