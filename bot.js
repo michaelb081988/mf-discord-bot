@@ -106,11 +106,6 @@ client.on('message', message => {
         }
         setEventStatus(message, args[0]);
     }
-
-    if(command === 'test') {
-        let m = client.channels.get(message.channel.id).send("This is a test");
-        m.edit("This is the edited one");
-    }
 });
 
 // 30 minute colo warning // 9:30
