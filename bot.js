@@ -97,6 +97,7 @@ client.on('message', message => {
 
     if(command === 'match') {
         if(args.length == 0) { sayMatchInfo(message.channel.id); return; }
+        if(args[0] == 'help' && args.length == 1) { message.reply(" Type !match to see total win/loss numbers. !match guildname win/loss to track a match."); }
         if(args.length != 2) { message.reply("Missing info. To use type !match guildname win/loss!"); return; }
         if(args[1] != "win" && args[1] != "loss") { message.reply("Win/Loss is not correct. To use type !match guildname win/loss!"); return; }
         addWinLoss(args[0], args[1], message);
