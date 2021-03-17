@@ -114,6 +114,10 @@ client.on('message', message => {
         }
         setEventStatus(message, args[0]);
     }
+	
+    if(command === 'test') {
+	    getAndSendEvent(message, args[0]);
+    }
 });
 
 // 30 minute colo warning // 9:30
