@@ -2,7 +2,7 @@ const Discord = require('discord.js'); //DiscordJS base
 const client = new Discord.Client(); //Client connector
 const cron = require('node-cron'); //Create scheduled cron tasks // Ran at X time
 
-const { Pool, Client } = require('pg');
+const { Client } = require('pg');
 
 const db = new Client({
     connectionString: process.env.DATABASE_URL,
