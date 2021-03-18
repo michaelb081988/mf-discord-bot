@@ -224,6 +224,9 @@ function getActiveEvents(message) {
 
 async function addWinLoss(guild, result, message) {
     //First look to see if guild exists in DB
+    if(result === 'win') {
+        sendEvent(coloChannel, "Congrats on the win against " + guild + "!", "https://i0.wp.com/mmos.com/wp-content/uploads/2020/11/sino-alice-bluestacks-guide-banner.jpg");
+    }
     const query = {
         text: "INSERT INTO matches(guild,result,date,author) VALUES($1, $2, $3, $4) RETURNING *",
         values: [guild, result, '11/22/3333', message.author.username]
@@ -231,6 +234,7 @@ async function addWinLoss(guild, result, message) {
     db.query(query)
     .then(res => {
         sayWinLoss(guild, message.channel.id);
+        sayWinLoss(guild, coloChannel);
     });
 }
 
