@@ -87,8 +87,9 @@ client.on('message', message => {
 
     if(command === 'colo') {
         message.reply(` I announce colo to the discord. Use !late or !afk and I will record it for the days colo announcement!
-        !blood will turn on/off the blood event notifications.
-        !upgrade will turn off the spam in the #events channel.`);
+        !events will show currently enabled/disabled events.
+        !matches will show our track record and !matches help will tell you how to add wins/loss.
+        !list will show the colo announcement with no @ everyone ping.`);
     }
 	
     if(command === 'list' || command === 'lists') {
