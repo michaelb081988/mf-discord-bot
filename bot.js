@@ -115,6 +115,10 @@ client.on('message', message => {
         }
         setEventStatus(message, args[0]);
     }
+	
+    if(command === 'test') {
+	    getAndSendEvent(args[0]);
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -129,13 +133,13 @@ cron.schedule('0 57 9 * * *', () => {
 
 // Blood event, has to be a cron but then check if active during // 10:21
 cron.schedule('0 21 10 * * *', () => {
-    getAndSendEvent(message, 'blood');
+    getAndSendEvent('blood');
 });
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
     if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28)) {
-        getAndSendEvent(message, 'upgrade');
+        getAndSendEvent('upgrade');
     }
 
     if(conquestEvent) { //Check conquest event enabled.
@@ -266,7 +270,7 @@ async function sayMatchInfo(channel) {
     sendEvent(channel, "In total we have tracked " + wins + " wins and " + losses + " losses.");
 }
 
-function getAndSendEvent(message, event) {
+function getAndSendEvent(event) {
     const query = {
         text: "SELECT * FROM EVENTS WHERE slug = $1",
         values: [event]
