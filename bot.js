@@ -252,11 +252,11 @@ async function addWinLoss(guild, result, message) {
 
 async function deleteLastMatch(guild, message) {
     const query = {
-        text: "DELETE FROM matches WHERE guild = $1",
+        text: "DELETE FROM matches WHERE id in (SELECT id FROM matches WHERE guild = $1 ORDER BY id desc LIMIT 1)",
 	values: [guild]
     };
     await db.query(query);
-    message.reply(" last match against " + guild + " has been removed from the DB");
+    message.reply(" last match against " + guild + " has been removed from the DB hopefully.");
     sayWinLoss(guild, message.channel.id);
 }
 
