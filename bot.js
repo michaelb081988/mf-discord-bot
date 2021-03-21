@@ -65,6 +65,12 @@ client.on('message', message => {
         client.channels.get(message.channel.id).send("I am still alive! - Current Time (for Mani): " + date.getHours() + ":" + date.getMinutes());
     }
 	
+    if(command === 'mistake') {
+        if(args.length != 2 || args[1] != 'confirm') { message.reply(" to correctly use this type !mistake <guildname> confirm. This will DELETE the last entry for this guild in the !match history."); return; }
+	deleteLastMatch(guild, message);
+        return;
+    }
+	
     if(command === 'afk') {
         if(afkPlayers.includes(message.author.username)) {
             message.reply(" is no longer going to be AFK. Removed from the list!!");
@@ -242,6 +248,16 @@ async function addWinLoss(guild, result, message) {
         sayWinLoss(guild, message.channel.id);
         sayWinLoss(guild, coloChannel);
     });
+}
+
+async function deleteLastMatch(guild, message) {
+    const query = {
+        text: "DELETE FROM matches WHERE guild = $1",
+	values: [guild]
+    };
+    await db.query(query);
+    message.reply(" last match against " + guild + " has been removed from the DB");
+    sayWinLoss(guild, message.channel.id);
 }
 
 async function sayWinLoss(guild, channel) {
