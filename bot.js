@@ -67,7 +67,7 @@ client.on('message', message => {
 	
     if(command === 'mistake') {
         if(args.length != 2 || args[1] != 'confirm') { message.reply(" to correctly use this type !mistake <guildname> confirm. This will DELETE the last entry for this guild in the !match history."); return; }
-	deleteLastMatch(guild, message);
+	deleteLastMatch(args[0], message);
         return;
     }
 	
@@ -237,7 +237,7 @@ function getActiveEvents(message) {
 async function addWinLoss(guild, result, message) {
     //First look to see if guild exists in DB
     if(result === 'win') {
-        sendEvent(coloChannel, "Congrats on the win against " + guild + "!", "https://i0.wp.com/mmos.com/wp-content/uploads/2020/11/sino-alice-bluestacks-guide-banner.jpg");
+        //sendEvent(coloChannel, "Congrats on the win against " + guild + "!", "https://i0.wp.com/mmos.com/wp-content/uploads/2020/11/sino-alice-bluestacks-guide-banner.jpg");
     }
     const query = {
         text: "INSERT INTO matches(guild,result,date,author) VALUES($1, $2, $3, $4) RETURNING *",
@@ -246,7 +246,7 @@ async function addWinLoss(guild, result, message) {
     db.query(query)
     .then(res => {
         sayWinLoss(guild, message.channel.id);
-        sayWinLoss(guild, coloChannel);
+        //sayWinLoss(guild, coloChannel);
     });
 }
 
