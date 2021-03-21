@@ -98,7 +98,7 @@ client.on('message', message => {
 
     if(command === 'match') {
         if(args.length == 0) { sayMatchInfo(message.channel.id); return; }
-        if(args[0] != 'help' && args.length == 1) { getGuildStats(args[0], message); return; }
+        if(args[0] != 'help' && args.length == 1) { sayWinLoss(args[0], message); return; }
         if(args[0] == 'help' && args.length == 1) { message.reply(" Type !match to see total win/loss numbers. !match guildname win/loss to track a match."); return; }
         if(args.length != 2) { message.reply("Missing info. To use type !match guildname win/loss!"); return; }
         if(args[1] != "win" && args[1] != "loss") { message.reply("Win/Loss is not correct. To use type !match guildname win/loss!"); return; }
@@ -286,24 +286,6 @@ function getAndSendEvent(event) {
             sendEvent(eventChannel, res.rows[0]['message'], res.rows[0]['image']);
         }
     });
-}
-
-async function getGuildStats(guild, message) {
-    const win = {
-        text: "SELECT * FROM matches WHERE result = $1 AND guild = $2",
-        values: ['win', guild]
-    };
-    const loss = {
-        text: "SELECT * FROM matches WHERE result = $1 AND guild = $2",
-        values: ['loss', guild]
-    };
-
-    let wins = 0;
-    let losses = 0;
-
-    await db.query(win).then(res => wins = res.rows.length);
-    await db.query(loss).then(res => losses = res.rows.length);
-    sendEvent(channel, "Against " + guild + " we have tracked " + wins + " wins and " + losses + " losses.");
 }
 
 function setEventStatus(message, event) {
