@@ -296,7 +296,7 @@ async function sayWinLoss(guild, channel) {
 
     await db.query(win).then(res => wins = res.rows.length);
     await db.query(loss).then(res => losses = res.rows.length);
-    await db.query(scum).then(res => {if(res.rows.length > 0) { scum = true; }})
+    await db.query(scum).then(res => {if(res.rows.length > 0) { scummy = true; }})
     sendEvent(channel, "Against " + guild + " we have won " + wins + " and lost " + losses);
     if(scummy){ sendEvent(channel, "They are a scummy guild that use combo boost tactics."); }
 }
