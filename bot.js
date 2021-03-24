@@ -292,13 +292,13 @@ async function sayWinLoss(guild, channel) {
 
     let wins = 0;
     let losses = 0;
-    let scum = false;
+    let scummy = false;
 
     await db.query(win).then(res => wins = res.rows.length);
     await db.query(loss).then(res => losses = res.rows.length);
     await db.query(scum).then(res => {if(res.rows.length > 0) { scum = true; }})
     sendEvent(channel, "Against " + guild + " we have won " + wins + " and lost " + losses);
-    if(scum){ sendEvent(channel, "They are a scummy guild that use combo boost tactics."); }
+    if(scummy){ sendEvent(channel, "They are a scummy guild that use combo boost tactics."); }
 }
 
 async function sayMatchInfo(channel) {
