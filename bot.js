@@ -131,6 +131,11 @@ client.on('message', message => {
     if(command === 'test') {
 	    getAndSendEvent(args[0]);
     }
+
+    if(command === 'scum') {
+        if(args.length != 1) { message.reply(" use !scum <guildname> to add a guild to the scum list for using combo boosts. \nWill let you know when !match <guildname> is used."); return;}
+        addScumGuild(message, args[0]);
+    }
 });
 
 // 30 minute colo warning // 9:30
@@ -247,6 +252,17 @@ async function addWinLoss(guild, result, message) {
     .then(res => {
         sayWinLoss(guild, message.channel.id);
         //sayWinLoss(guild, coloChannel);
+    });
+}
+
+async function addScumGuild(message, guild) {
+    const query = {
+        text: "INSERT INTO scum(guild) VALUES($1) RETURNING *",
+        values: [guild]
+    };
+    db.query(query)
+    .then(res => {
+        message.reply(" scum " + guild + " has been added to the list and will notify you when !match <guildname> is used.");
     });
 }
 
