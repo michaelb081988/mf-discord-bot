@@ -285,13 +285,20 @@ async function sayWinLoss(guild, channel) {
         text: "SELECT * FROM matches WHERE guild = $1 AND result = $2",
         values: [guild, 'loss']
     };
+    const scum = {
+        text: "SELECT * FROM scum WHERE guild = $1",
+        values: [guild]
+    };
 
     let wins = 0;
     let losses = 0;
+    let scum = false;
 
     await db.query(win).then(res => wins = res.rows.length);
     await db.query(loss).then(res => losses = res.rows.length);
+    await db.query(scum).then(res => {if(res.rows.length > 0) { scum = true; }})
     sendEvent(channel, "Against " + guild + " we have won " + wins + " and lost " + losses);
+    if(scum){ sendEvent(channel, "They are a scummy guild that use combo boost tactics."); }
 }
 
 async function sayMatchInfo(channel) {
