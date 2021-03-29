@@ -155,7 +155,7 @@ cron.schedule('0 21 10 * * *', () => {
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
-    if(isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(0,28)) {
+    if(isTime(00, 30) || isTime(2, 30) || isTime(4, 30) || isTime(6, 30) || isTime(8, 30) || isTime(10, 30) || isTime(18, 30) || isTime(20, 30) || isTime(22, 30)) {
         getAndSendEvent('upgrade');
     }
 
