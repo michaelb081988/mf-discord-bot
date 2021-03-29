@@ -23,6 +23,20 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 let conquestEvent = true; // Conquest Events, there are so many of them :sigh
 let currentConquest = 1; // Current conquest active
 
+let upgradeEventTimes = [
+	//[hour, minute],
+	[0, 11],
+	[0, 28],
+	[2, 28],
+	[4, 28],
+	[6, 28],
+	[8, 28],
+	[10, 28],
+	[18, 28],
+	[20, 28],
+	[22, 28]
+];
+
 let conquestImages = [
     "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png", //Jörmungandr // 0
     "https://i.imgur.com/ZI15o2d.png" // Belial // 1
@@ -155,8 +169,10 @@ cron.schedule('0 21 10 * * *', () => {
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
-    if(isTime(00, 28) || isTime(2, 28) || isTime(4, 28) || isTime(6, 28) || isTime(8, 28) || isTime(10, 28) || isTime(18, 28) || isTime(20, 28) || isTime(22, 28)) {
-        getAndSendEvent('upgrade');
+    for(int i = 0; i < upgradeEventTimes.length; i++) {
+        if(isTime(upgradeEventTimes[i][0], upgradeEventTimes[i][1])) {
+            getAndSendEvent('upgrade');
+        }
     }
 
     if(conquestEvent) { //Check conquest event enabled.
