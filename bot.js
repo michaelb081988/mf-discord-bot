@@ -25,7 +25,7 @@ let currentConquest = 1; // Current conquest active
 
 let upgradeEventTimes = [
 	//[hour, minute],
-	[0, 11],
+	[0, 13],
 	[0, 28],
 	[2, 28],
 	[4, 28],
@@ -169,7 +169,7 @@ cron.schedule('0 21 10 * * *', () => {
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
 cron.schedule('0 * * * * *', () => {
-    for(int i = 0; i < upgradeEventTimes.length; i++) {
+    for(i = 0; i < upgradeEventTimes.length; i++) {
         if(isTime(upgradeEventTimes[i][0], upgradeEventTimes[i][1])) {
             getAndSendEvent('upgrade');
         }
