@@ -25,7 +25,6 @@ let currentConquest = 1; // Current conquest active
 
 let upgradeEventTimes = [
 	//[hour, minute],
-	[0, 15],
 	[0, 28],
 	[2, 28],
 	[4, 28],
