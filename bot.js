@@ -163,7 +163,7 @@ cron.schedule('0 57 9 * * *', () => {
 
 // Blood event, has to be a cron but then check if active during // 10:21
 cron.schedule('0 21 10 * * *', () => {
-    getAndSendEvent('blood');
+    getAndSendEvent('blood', coloChannel);
 });
 
 // Check for guerilla/upgrade event. Will eventually check everything with this.
@@ -334,7 +334,7 @@ async function sayMatchInfo(channel) {
     sendEvent(channel, "In total we have tracked " + wins + " wins and " + losses + " losses.");
 }
 
-function getAndSendEvent(event) {
+function getAndSendEvent(event, channel = eventChannel) {
     const query = {
         text: "SELECT * FROM EVENTS WHERE slug = $1",
         values: [event]
@@ -342,7 +342,7 @@ function getAndSendEvent(event) {
     db.query(query)
     .then(res => {
         if(res.rows[0]['active']) {
-            sendEvent(eventChannel, res.rows[0]['message'], res.rows[0]['image']);
+            sendEvent(channel, res.rows[0]['message'], res.rows[0]['image']);
         }
     });
 }
