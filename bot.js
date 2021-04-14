@@ -21,7 +21,7 @@ let spamChannel = '816677982562811944'; // #mani's-bot-testing
 
 //Event Timers // Setting them to FALSE turns them off completely...
 let conquestEvent = true; // Conquest Events, there are so many of them :sigh
-let currentConquest = 1; // Current conquest active
+let currentConquest = 2; // Current conquest active
 
 let upgradeEventTimes = [
 	//[hour, minute],
@@ -38,7 +38,8 @@ let upgradeEventTimes = [
 
 let conquestImages = [
     "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/f/f7/Nightmare_in_the_chapel.png", //Jörmungandr // 0
-    "https://i.imgur.com/ZI15o2d.png" // Belial // 1
+    "https://i.imgur.com/ZI15o2d.png", // Belial // 1
+    "https://static.wikia.nocookie.net/sinoalice_gamepedia_en/images/1/14/Slade_raid_banner.png/revision/latest/scale-to-width-down/400?cb=20200713190007" // Slade JP // 2
 ];
 
 //Keep a list of AFK/Late players to show during colo live message!
