@@ -117,7 +117,7 @@ client.on('message', message => {
     }
 	
 	if(command === 'rem') {
-		client.channels.get(message.channel.id).send("Mani got Rem! :emoji_1:", { file: "http://www.anime-evo.net/wp-content/uploads/2016/06/ReZero_11_1-700x385.jpg" });
+		client.channels.get(message.channel.id).send("Mani didn't get Rem!", { file: "https://media.tenor.com/images/d6fd7c3d6e04fecb165984f9cfdcc9ee/tenor.png" });
 	}
 
     if(command === 'match') {
