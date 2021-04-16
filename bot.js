@@ -115,6 +115,10 @@ client.on('message', message => {
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
+	
+	if(command === 'rem') {
+		client.channels.get(message.channel.id).send("Mani got Rem! :emoji_1:", { file: "http://www.anime-evo.net/wp-content/uploads/2016/06/ReZero_11_1-700x385.jpg" });
+	}
 
     if(command === 'match') {
         if(args.length == 0) { sayMatchInfo(message.channel.id); return; }
