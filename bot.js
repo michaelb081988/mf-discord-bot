@@ -86,6 +86,7 @@ client.on('message', message => {
     }
 	
     if(command === 'afk') {
+	if(coloTime()) { message.reply(" colo has already started. Cannot add you to the AFK/Late list."); return; }
         if(afkPlayers.includes(message.author.username)) {
             message.reply(" is no longer going to be AFK. Removed from the list!!");
             afkPlayers = afkPlayers.filter(e => e !== message.author.username);
@@ -96,6 +97,7 @@ client.on('message', message => {
     }
 
     if(command === 'late') {
+	if(coloTime()) { message.reply(" colo has already started. Cannot add you to the AFK/Late list."); return; }
         if(latePlayers.includes(message.author.username)) {
             message.reply(" is no longer going to be late. Removed from the list!!");
             latePlayers = latePlayers.filter(e => e !== message.author.username);
@@ -192,6 +194,16 @@ function isTime(hours, minutes) {
         return true;
     }
     return false;
+}
+
+function coloTime() {
+	let date = new Date();
+    if(date.getHours() == 10) {
+		if(date.getMinutes() > 9 && date.getMinutes < 21) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function sendColo(text, reset = false) {
