@@ -199,7 +199,7 @@ function isTime(hours, minutes) {
 function coloTime() {
 	let date = new Date();
     if(date.getHours() == 10) {
-		if(date.getMinutes() > 9 && date.getMinutes < 21) {
+		if(date.getMinutes() > 9 || date.getMinutes < 21) {
 			return true;
 		}
 	}
