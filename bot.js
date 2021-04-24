@@ -119,7 +119,7 @@ client.on('message', message => {
     }
 	
 	if(command === 'rem') {
-		client.channels.get(message.channel.id).send("Mani didn't get Rem!", { file: "https://media.tenor.com/images/d6fd7c3d6e04fecb165984f9cfdcc9ee/tenor.png" });
+		client.channels.get(message.channel.id).send("Mani got Rem!!!", { file: "https://reallifeanime.files.wordpress.com/2016/07/rezero-arc-3-43.jpg" });
 	}
 
     if(command === 'match') {
