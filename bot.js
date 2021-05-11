@@ -117,10 +117,6 @@ client.on('message', message => {
     if(command === 'list' || command === 'lists') {
         sendColo("Here is the current list for tonights colo!", false);
     }
-	
-	if(command === 'rem') {
-		client.channels.get(message.channel.id).send("Mani got Rem!!!", { file: "https://reallifeanime.files.wordpress.com/2016/07/rezero-arc-3-43.jpg" });
-	}
 
     if(command === 'match') {
         if(args.length == 0) { sayMatchInfo(message.channel.id); return; }
@@ -146,10 +142,6 @@ client.on('message', message => {
             return;
         }
         setEventStatus(message, args[0]);
-    }
-	
-    if(command === 'test') {
-	    getAndSendEvent(args[0]);
     }
 
     if(command === 'scum') {
